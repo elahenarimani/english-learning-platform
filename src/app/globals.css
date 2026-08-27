@@ -1,26 +1,144 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+
+/* =========================Reset========================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  min-height: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  min-height: 100svh;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+/* =========================Elements========================= */
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* =========================Form========================= */
+
+input,
+textarea,
+select {
+  outline: none;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-text-muted);
+}
+:root {
+  /* Brand */
+  --color-primary: #4880ff;
+  --color-secondary: #434343;
+
+  /* Background */
+  --color-background: #ffffff;
+  --color-surface: #f8f9fa;
+  --color-surface-hover: #f1f3f5;
+
+  /* Text */
+  --color-foreground: #202224;
+  --color-text-secondary: #6b7280;
+  --color-text-muted: #9ca3af;
+  --color-text-disabled: #b2b2b2;
+
+  /* Border */
+  --color-border: #e5e7eb;
+  --color-border-hover: #c6c2c2;
+  --color-border-focus: #4880ff;
+
+  /* Status */
+  --color-success: #16a34a;
+  --color-success-background: #d9f7e8;
+
+  --color-warning: #f59e0b;
+  --color-warning-background: #fff3d6;
+
+  --color-error: #ea0234;
+  --color-error-background: #ffe4e9;
+
+  --color-info: #3b82f6;
+  --color-info-background: #e5e4ff;
+
+  /* Common */
+  --color-white: #ffffff;
+  --color-black: #000000;
+}
+
+/* Dark Theme */
+.dark {
+  /* Brand */
+  --color-primary: #6d9aff;
+  --color-secondary: #d1d5db;
+
+  /* Background */
+  --color-background: #111827;
+  --color-surface: #1f2937;
+  --color-surface-hover: #374151;
+
+  /* Text */
+  --color-foreground: #f9fafb;
+  --color-text-secondary: #d1d5db;
+  --color-text-muted: #9ca3af;
+  --color-text-disabled: #6b7280;
+
+  /* Border */
+  --color-border: #374151;
+  --color-border-hover: #4b5563;
+  --color-border-focus: #6d9aff;
+
+  /* Status */
+  --color-success: #4ade80;
+  --color-success-background: #14532d;
+
+  --color-warning: #fbbf24;
+  --color-warning-background: #78350f;
+
+  --color-error: #fb7185;
+  --color-error-background: #4c0519;
+
+  --color-info: #60a5fa;
+  --color-info-background: #172554;
+
+  /* Common */
+  --color-white: #ffffff;
+  --color-black: #000000;
 }
