@@ -41,3 +41,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Backend
+learningEnglish-Back/venv/
+learningEnglish-Back/__pycache__/
+learningEnglish-Back/*.pyc
