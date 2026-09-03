@@ -1,0 +1,29 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
+
+/* Selection */
+
+::selection {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+/* Focus */
+
+:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+/* Placeholder */
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-text-muted);
+}
