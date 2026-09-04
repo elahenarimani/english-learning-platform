@@ -1,4 +1,14 @@
 @use "./tokens/colors";
+@use "./tokens/spacing";
+@use "./tokens/radius";
+@use "./tokens/shadow";
+@use "./tokens/typography";
+@use "./tokens/border";
+@use "./tokens/breakpoints";
+@use "./tokens/transition";
+@use "./tokens/fontWeights";
+@use "./tokens/lineheight";
+
 @use "./base/reset";
 @use "./base/globals";
 

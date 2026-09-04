@@ -1,0 +1,107 @@
+@use "../../../styles/tokens/index.scss" as var;
+@keyframes btn-loading {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+.button {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: var.$space-2 var.$space-4;
+  &.contained {
+    background-color: var(--color-brand);
+    color: var(--color-foreground);
+    border-radius: var.$radius-full;
+    &.brand {
+      background-color: var(--color-white);
+      color: var(--color-black);
+    }
+    &.secondary {
+      background-color: var(--color-white);
+      color: var(--color-black);
+    }
+    &.success {
+      background-color: var(--color-success-background);
+      color: var(--color-success);
+    }
+    &.error {
+      background-color: var(--color-error-background);
+      color: var(--color-error);
+    }
+    &.warning {
+      background-color: var(--color-warning-background);
+      color: var(--color-warning);
+    }
+    &.info {
+      background-color: var(--color-info-background);
+      color: var(--color-info);
+    }
+  }
+
+  &.outlined {
+    background-color: var(--color-white);
+    color: var(--color-black);
+    border-radius: var.$radius-full;
+    border: 1px solid var(--color-black);
+    &.brand {
+      background-color: var(--color-white);
+      color: var(--color-black);
+    }
+    &.secondary {
+      background-color: var(--color-white);
+      color: var(--color-black);
+    }
+    &.success {
+      background-color: var(--color-success-background);
+      color: var(--color-success);
+    }
+    &.error {
+      background-color: var(--color-error-background);
+      color: var(--color-error);
+    }
+    &.warning {
+      background-color: var(--color-warning-background);
+      color: var(--color-warning);
+    }
+    &.info {
+      background-color: var(--color-info-background);
+      color: var(--color-info);
+    }
+  }
+  &.text {
+    background-color: var(--color-white);
+    color: var(--color-white);
+    color: var(--color-black);
+  }
+  &.full-width {
+    display: block;
+    width: 100%;
+  }
+  &.sm {
+    height: 36px;
+  }
+  &.md {
+    height: 48px;
+  }
+  &.lg {
+    height: 58px;
+  }
+  &:disabled {
+    background-color: var(--color-brand-disabled);
+    color: var(--color-text-disabled);
+    border: none;
+    cursor: not-allowed;
+  }
+  &:active {
+    background-color: var(--color-brand-active);
+  }
+  &.loading {
+    animation: btn-loading 2s infinite;
+  }
+}

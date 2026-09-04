@@ -1,0 +1,26 @@
+.input{
+  border: 1px solid gray;
+  outline: none;
+  &:focus {
+    border-color: black;
+  }
+  &.sm {
+    height: 36px;
+  }
+  &.md {
+    height: 48px;
+  }
+  &.lg {
+    height: 64px;
+  }
+  &.error {
+    border-color: red;
+  }
+  &.success {
+    border-color: green;
+  }
+  &.full-width {
+    display: block;
+    width: 100%;
+  }
+}

@@ -1,6 +1,9 @@
 :root {
   /* Brand */
-  --color-primary: #4880ff;
+  --color-brand: #4880ff;
+  --color-brand-hover: #3d70e6;
+  --color-brand-active: #3261cc;
+  --color-brand-disabled: #3f4b63;;
   --color-secondary: #434343;
 
   /* Background */
@@ -36,9 +39,12 @@
   --color-white: #ffffff;
   --color-black: #000000;
 }
-.dark {
+:root.dark {
   /* Brand */
-  --color-primary: #6d9aff;
+  --color-brand: #6d9aff;
+  --color-brand-hover: #82a8ff;
+  --color-brand-active: #5b89f0;
+  --color-brand-disabled:  #b8c2d6;
   --color-secondary: #d1d5db;
 
   /* Background */
