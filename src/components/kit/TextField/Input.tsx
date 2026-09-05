@@ -2,34 +2,58 @@ import styles from "./Input.module.scss";
 import clsx from "clsx";
 
 type TInputSize = "sm" | "md" | "lg";
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+
+interface InputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
+  label?: string;
   inputSize?: TInputSize;
   error?: boolean;
-  success?:boolean;
+  success?: boolean;
   fullWidth?: boolean;
+  helperText?: string;
 }
+
 const Input: React.FC<InputProps> = ({
+  label,
   inputSize = "md",
   error = false,
+  success = false,
   fullWidth = false,
-  children,
-  success= false,
+  helperText,
   ...rest
 }) => {
   return (
-    <>
-      <input
-      {...rest}
-      className={clsx(
-        styles.input,
-        inputSize && styles[inputSize],
-        error && styles["error"],
-        success && styles["success"],
-        fullWidth && styles["full-width"],
+    <div className={styles.wrapper}>
+      {label && (
+        <label className={styles.label}>
+          {label}
+        </label>
       )}
-      >
-      </input>
-    </>
+
+      <input
+        {...rest}
+        className={clsx(
+          styles.input,
+          styles[inputSize],
+          error && styles.error,
+          success && styles.success,
+          fullWidth && styles["full-width"]
+        )}
+      />
+
+      {helperText && (
+        <span
+          className={clsx(
+            styles.helperText,
+            error && styles.errorText,
+            success && styles.successText
+          )}
+        >
+          {helperText}
+        </span>
+      )}
+    </div>
   );
 };
+
 export default Input;

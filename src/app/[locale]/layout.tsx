@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "../../styles/globals.scss";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v16-appRouter";
 
 import localFont from "next/font/local";
 import { notFound } from "next/navigation";
@@ -63,7 +64,7 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={messages}>
           <QueryProvider>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-              {children}
+              <AppRouterCacheProvider>{children}</AppRouterCacheProvider>
             </ThemeProvider>
           </QueryProvider>
         </NextIntlClientProvider>

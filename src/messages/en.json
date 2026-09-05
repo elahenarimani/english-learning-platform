@@ -2,5 +2,27 @@
   "Home": {
     "title": "Welcome to the language learning platform",
     "description": "Learn languages with the best teachers"
+  },
+  "Register": {
+    "firstName": "First name",
+    "lastName": "Last name",
+    "username": "User name",
+    "email": "Email",
+    "password": "Password",
+    "student": "student",
+    "teacher": "teacher",
+    "confirmPassword": "Confirm password",
+    "submit": "Create account",
+    "registering": "Creating account...",
+    "registerError": "Registration failed",
+    "registerSuccess": "Account created successfully",
+    "firstNameMin": "First name must be at least 2 characters",
+    "lastNameMin": "Last name must be at least 2 characters",
+    "usernameMin": "Username must be at least 3 characters",
+    "usernameMax": "Username cannot be more than 20 characters",
+    "emailInvalid": "Please enter a valid email",
+    "passwordMin": "Password must be at least 8 characters",
+    "confirmPasswordMin": "Confirm password is required",
+    "passwordMismatch": "Password and confirmation do not match"
   }
 }

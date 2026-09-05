@@ -9,6 +9,11 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@hookform/resolvers": "^5.9.1",
+    "@mui/material": "^9.4.0",
+    "@mui/material-nextjs": "^9.4.0",
     "@tanstack/react-query": "^5.102.8",
     "@wrksz/themes": "^1.2.0",
     "axios": "^1.20.0",
@@ -17,7 +22,9 @@
     "next-intl": "^4.14.2",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "sass": "^1.103.1"
+    "react-hook-form": "^7.87.0",
+    "sass": "^1.103.1",
+    "zod": "^4.5.4"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
