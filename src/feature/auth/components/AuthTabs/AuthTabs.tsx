@@ -5,6 +5,7 @@ export default function AuthTabs() {
   const pathname = usePathname();
   const router = useRouter();
   const locale = pathname.split("/")[1];
+  console.log("pathname,",pathname)
   const activeTab = pathname.endsWith("/register") ? 1 : 0;
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     if (newValue === 0) {

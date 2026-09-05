@@ -1,5 +1,5 @@
 "use client";
-
+import styles from "./RegisterForm.module.scss";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Tabs, Tab } from "@mui/material";
@@ -33,12 +33,11 @@ export function RegisterForm() {
     },
   });
 
-
   const isTeacher = watch("is_teacher");
 
   const handleRoleChange = (
     _event: React.SyntheticEvent,
-    newValue: "student" | "teacher"
+    newValue: "student" | "teacher",
   ) => {
     setValue("is_teacher", newValue === "teacher", {
       shouldValidate: true,
@@ -64,70 +63,69 @@ export function RegisterForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
       {/* Student / Teacher */}
       <Tabs
         value={isTeacher ? "teacher" : "student"}
         onChange={handleRoleChange}
         variant="fullWidth"
       >
-        <Tab
-          value="student"
-          label={t("student")}
-        />
+        <Tab value="student" label={t("student")} />
 
-        <Tab
-          value="teacher"
-          label={t("teacher")}
-        />
+        <Tab value="teacher" label={t("teacher")} />
       </Tabs>
 
       {/* First Name */}
-      <Input
-        label={t("firstName")}
-        type="text"
-        {...register("first_name")}
-        error={!!errors.first_name}
-        helperText={errors.first_name?.message}
-      />
+      <div className={styles.row}>
+        <Input
+          label={t("firstName")}
+          type="text"
+          {...register("first_name")}
+          error={!!errors.first_name}
+          helperText={errors.first_name?.message}
+        />
 
-      {/* Last Name */}
-      <Input
-        label={t("lastName")}
-        type="text"
-        {...register("last_name")}
-        error={!!errors.last_name}
-        helperText={errors.last_name?.message}
-      />
+        {/* Last Name */}
+        <Input
+          label={t("lastName")}
+          type="text"
+          {...register("last_name")}
+          error={!!errors.last_name}
+          helperText={errors.last_name?.message}
+        />
+      </div>
 
       {/* Email */}
-      <Input
-        label={t("email")}
-        type="email"
-        {...register("email")}
-        error={!!errors.email}
-        helperText={errors.email?.message}
-      />
-
+      <div className={styles.fields}>
+        <Input
+          label={t("email")}
+          type="email"
+          {...register("email")}
+          error={!!errors.email}
+          helperText={errors.email?.message}
+        />
+      </div>
       {/* Password */}
-      <Input
-        label={t("password")}
-        type="password"
-        {...register("password")}
-        error={!!errors.password}
-        helperText={errors.password?.message}
-      />
+      <div className={styles.row}>
+        <Input
+          label={t("password")}
+          type="password"
+          {...register("password")}
+          error={!!errors.password}
+          helperText={errors.password?.message}
+        />
 
-      {/* Confirm Password */}
-      <Input
-        label={t("confirmPassword")}
-        type="password"
-        {...register("confirmPassword")}
-        error={!!errors.confirmPassword}
-        helperText={errors.confirmPassword?.message}
-      />
+        {/* Confirm Password */}
 
-      <button type="submit">
+        <Input
+          label={t("confirmPassword")}
+          type="password"
+          {...register("confirmPassword")}
+          error={!!errors.confirmPassword}
+          helperText={errors.confirmPassword?.message}
+        />
+      </div>
+      <button type="submit" className={styles.submitButton}>
         {t("submit")}
       </button>
     </form>
