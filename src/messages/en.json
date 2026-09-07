@@ -11,6 +11,7 @@
     "password": "Password",
     "student": "student",
     "teacher": "teacher",
+    "admin": "admin",
     "confirmPassword": "Confirm password",
     "submit": "Create account",
     "registering": "Creating account...",
@@ -23,6 +24,7 @@
     "emailInvalid": "Please enter a valid email",
     "passwordMin": "Password must be at least 8 characters",
     "confirmPasswordMin": "Confirm password is required",
-    "passwordMismatch": "Password and confirmation do not match"
+    "passwordMismatch": "Password and confirmation do not match",
+    "roleRequired":"roleRequired"
   }
 }

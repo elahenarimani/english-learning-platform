@@ -1,0 +1,39 @@
+@use "../../../../styles/tokens/index.scss" as var;
+.tab-wrapper {
+  padding-top: var.$space-4;
+  padding-right: var.$space-2;
+  padding-left: var.$space-2;
+  .tabs {
+    max-width: 600px;
+    margin: 0 auto;
+    width: 100%;
+    background-color: var(--color-input-background);
+    border-radius: var.$radius-2xl;
+
+    :global(.MuiTabs-flexContainer) {
+      width: 100%;
+    }
+
+    :global(.MuiTabs-indicator) {
+      display: none;
+    }
+
+    .tab {
+      flex: 1;
+      max-width: none;
+
+      background-color: transparent;
+      color: var(--color-text-disabled);
+
+      border-radius: var.$radius-2xl;
+
+      margin: var.$space-2;
+
+      &:global(.Mui-selected) {
+        background-color: white;
+        color: black;
+      }
+    }
+    // =========================Tablet=========================
+  }
+}

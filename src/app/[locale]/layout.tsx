@@ -12,6 +12,7 @@ import { ThemeProvider } from "@wrksz/themes/next";
 import { routing } from "@/i18n/routing";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "Learning English",
@@ -65,6 +66,7 @@ export default async function LocaleLayout({
           <QueryProvider>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
               <AppRouterCacheProvider>{children}</AppRouterCacheProvider>
+              <Toaster position="top-center" />
             </ThemeProvider>
           </QueryProvider>
         </NextIntlClientProvider>

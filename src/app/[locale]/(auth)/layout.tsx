@@ -1,6 +1,5 @@
 import AuthTabs from "@/feature/auth/components/AuthTabs/AuthTabs";
 
-
 export default function AuthLayout({
   children,
 }: {

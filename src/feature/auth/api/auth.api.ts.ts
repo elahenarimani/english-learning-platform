@@ -1,11 +1,17 @@
 import { apiClient } from '@/lib/api/apiClient';
-import { RegisterFormValues } from '../schemas/register.schema';
 
+export interface RegisterRequest {
+  email: string;
+  password: string;
+  first_name: string;
+  last_name: string;
+  is_teacher: boolean;
+}
 export const registerUser = async (
-  data: RegisterFormValues
+  data: RegisterRequest
 ) => {
   const response = await apiClient.post(
-    "/api/register",
+    "/register/",
     data
   );
 

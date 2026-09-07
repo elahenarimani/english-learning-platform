@@ -1,16 +1,17 @@
+import { ClassNames } from "@emotion/react";
 import styles from "./Input.module.scss";
 import clsx from "clsx";
 
 type TInputSize = "sm" | "md" | "lg";
 
-interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   inputSize?: TInputSize;
   error?: boolean;
   success?: boolean;
   fullWidth?: boolean;
   helperText?: string;
+  ClassName?:string;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -20,15 +21,12 @@ const Input: React.FC<InputProps> = ({
   success = false,
   fullWidth = false,
   helperText,
+  className,
   ...rest
 }) => {
   return (
     <div className={styles.wrapper}>
-      {label && (
-        <label className={styles.label}>
-          {label}
-        </label>
-      )}
+      {label && <label className={styles.label}>{label}</label>}
 
       <input
         {...rest}
@@ -37,21 +35,20 @@ const Input: React.FC<InputProps> = ({
           styles[inputSize],
           error && styles.error,
           success && styles.success,
-          fullWidth && styles["full-width"]
+          fullWidth && styles["full-width"],
+          className,
         )}
       />
 
-      {helperText && (
-        <span
-          className={clsx(
-            styles.helperText,
-            error && styles.errorText,
-            success && styles.successText
-          )}
-        >
-          {helperText}
-        </span>
-      )}
+      <span
+        className={clsx(
+          styles.helperText,
+          error && styles.errorText,
+          success && styles.successText,
+        )}
+      >
+        {helperText}
+      </span>
     </div>
   );
 };

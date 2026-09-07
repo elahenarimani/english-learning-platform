@@ -1,11 +1,11 @@
 "use client";
 import { Tabs, Tab } from "@mui/material";
 import { usePathname, useRouter } from "next/navigation";
+import styles from "./AuthTabs.module.scss"
 export default function AuthTabs() {
   const pathname = usePathname();
   const router = useRouter();
   const locale = pathname.split("/")[1];
-  console.log("pathname,",pathname)
   const activeTab = pathname.endsWith("/register") ? 1 : 0;
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     if (newValue === 0) {
@@ -17,9 +17,11 @@ export default function AuthTabs() {
     }
   };
   return (
-    <Tabs value={activeTab} onChange={handleChange} centered>
+    <div  className={styles["tab-wrapper"]}>
+      <Tabs value={activeTab} onChange={handleChange} centered className={styles.tabs}>
       {" "}
-      <Tab label="Sign In" /> <Tab label="Register" />{" "}
+      <Tab label="Sign In" className={styles.tab}/> <Tab label="Register" className={styles.tab}/>{" "}
     </Tabs>
+    </div>
   );
 }

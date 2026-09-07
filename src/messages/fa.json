@@ -11,6 +11,7 @@
     "password": "رمز عبور",
      "student": "دانشجو",
     "teacher": "معلم",
+    "admin": "ادمین",
     "confirmPassword": "تکرار رمز عبور",
     "submit": "ساخت حساب",
     "registering": "در حال ساخت حساب...",
@@ -23,6 +24,7 @@
     "emailInvalid": "ایمیل وارد شده معتبر نیست",
     "passwordMin": "رمز عبور باید حداقل ۸ کاراکتر باشد",
     "confirmPasswordMin": "تکرار رمز عبور الزامی است",
-    "passwordMismatch": "رمز عبور و تکرار آن یکسان نیستند"
+    "passwordMismatch": "رمز عبور و تکرار آن یکسان نیستند",
+    "roleRequired": "انتخاب نقش اجباری می باشد"
   }
 }
