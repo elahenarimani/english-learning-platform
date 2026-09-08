@@ -1,0 +1,21 @@
+@use "../../../../styles/tokens/index.scss" as var;
+.form {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: var.$space-8;
+  display: flex;
+  flex-direction: column;
+  gap: var.$space-8;
+  border-radius: var(--radius-lg);
+//   .btn-wrapper {
+//     width: 100%;
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//     gap: var.$space-2;
+//     > * {
+//       min-width: 170px;
+//     }
+  }
+ 

@@ -1,7 +1,7 @@
 "use client";
 import { ThemeToggle } from "@/components/kit/theme-toggle/ThemeToggle";
 import { useTranslations } from "next-intl";
-import { LanguageSwitcher } from "../LanguageSwitcher";
+import { LanguageSwitcher } from "../LanguageSwitcher/LanguageSwitcher";
 import styles from "./Navbar.module.scss"
 import Button from "@/components/kit/Button/Button";
 export function Navbar() {

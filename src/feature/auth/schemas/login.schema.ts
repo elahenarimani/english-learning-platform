@@ -4,7 +4,7 @@ type TranslateFunction = (key: string) => string;
 
 export const createLogInSchema = (t: TranslateFunction) =>
   z.object({
-    username: z.string().min(3, t("usernameMin")).max(20, t("usernameMax")),
+    email: z.string(),
 
     password: z.string().min(8, t("passwordMin")),
   });

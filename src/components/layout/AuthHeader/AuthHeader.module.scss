@@ -1,0 +1,8 @@
+@use "../../../styles/tokens/index.scss" as var;
+.header{
+    padding: var.$space-4 ;
+    display: flex;
+    justify-content:flex-end;
+    align-items: center;
+    gap:var.$space-2;
+}

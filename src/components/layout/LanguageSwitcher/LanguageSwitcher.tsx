@@ -1,7 +1,9 @@
 "use client";
 
 import { usePathname, useRouter } from "@/i18n/routing";
+import styles from "./LanguageSwitcher.module.scss";
 import { useLocale } from "next-intl";
+import Button from "../../kit/Button/Button";
 
 export function LanguageSwitcher() {
   const router = useRouter();
@@ -17,8 +19,13 @@ export function LanguageSwitcher() {
   };
 
   return (
-    <button type="button" onClick={changeLanguage}>
-      {locale === "fa" ? "English" : "فارسی"}
-    </button>
+    <Button
+      type="button"
+      variant="text"
+      onClick={changeLanguage}
+      className={styles.button}
+    >
+      {locale === "fa" ? "en" : "فا"}
+    </Button>
   );
 }

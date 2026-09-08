@@ -1,0 +1,4 @@
+@use "../../../styles//tokens/index.scss" as var;
+.button {
+  border-radius: var.$radius-full !important;
+}

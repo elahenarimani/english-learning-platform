@@ -1,13 +1,5 @@
-import { Navbar } from '@/components/layout/Navbar/Navbar';
-import Button from "../../components/kit/Button/Button"
+import { redirect } from "next/navigation";
 
-export default async function Home() {
-
-
-  return (
-    <main>
-      <Navbar />
-      <Button >کلیک کنید</Button >
-    </main>
-  );
+export default function HomePage() {
+  redirect("/en/register");
 }

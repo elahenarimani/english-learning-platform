@@ -13,7 +13,8 @@
     "teacher": "teacher",
     "admin": "admin",
     "confirmPassword": "Confirm password",
-    "submit": "Create account",
+    "create account": "Create account",
+    "log in":"log in",
     "registering": "Creating account...",
     "registerError": "Registration failed",
     "registerSuccess": "Account created successfully",
@@ -25,6 +26,12 @@
     "passwordMin": "Password must be at least 8 characters",
     "confirmPasswordMin": "Confirm password is required",
     "passwordMismatch": "Password and confirmation do not match",
-    "roleRequired":"roleRequired"
+    "roleRequired":"roleRequired",
+    "Registration successful!":"Registration successful!",
+    "Registration failed!":"Registration failed!",
+    "Register request finished":"Register request finished",
+    "Log in successful!":"Log in successful!",
+    "Log in failed!":"Log in failed!",
+    "Log in request finished":"Log in request finished"
   }
 }

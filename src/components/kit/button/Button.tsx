@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import styles from "./button.module.scss";
+import Spinner from "../Spinner/Spinner";
 type TButtonVariant = "contained" | "outlined" | "text";
 type TButtonSize = "sm" | "md" | "lg";
 type TButtonColor =
@@ -45,8 +46,7 @@ export default function Button({
           className,
         )}
       >
-        {" "}
-        {children}
+        {loading ? <Spinner size="sm" /> : children}
       </button>
     </>
   );

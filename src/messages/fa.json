@@ -9,11 +9,12 @@
     "username": "نام کاربری",
     "email": "ایمیل",
     "password": "رمز عبور",
-     "student": "دانشجو",
+    "student": "دانشجو",
     "teacher": "معلم",
     "admin": "ادمین",
     "confirmPassword": "تکرار رمز عبور",
-    "submit": "ساخت حساب",
+    "create account": "ساخت حساب",
+    "log in":"ورود",
     "registering": "در حال ساخت حساب...",
     "registerError": "ساخت حساب با خطا مواجه شد",
     "registerSuccess": "حساب شما با موفقیت ساخته شد",
@@ -25,6 +26,12 @@
     "passwordMin": "رمز عبور باید حداقل ۸ کاراکتر باشد",
     "confirmPasswordMin": "تکرار رمز عبور الزامی است",
     "passwordMismatch": "رمز عبور و تکرار آن یکسان نیستند",
-    "roleRequired": "انتخاب نقش اجباری می باشد"
+    "roleRequired": "انتخاب نقش اجباری می باشد",
+    "Registration successful!": "ثبت‌نام شما با موفقیت انجام شد.",
+    "Registration failed!": "ثبت‌نام انجام نشد. لطفاً دوباره تلاش کنید.",
+    "Register request finished": "فرآیند ثبت‌نام به پایان رسید.",
+     "Log in successful!":"ورود شما با موفقیت انجام شد",
+    "Log in failed!":"ورود انجام نشد لطفا دوباره تلاش کنید",
+    "Log in request finished":"فرآیند ورود با موفقیت انجام شد"
   }
 }

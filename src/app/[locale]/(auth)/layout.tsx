@@ -1,3 +1,4 @@
+import AuthHeader from "@/components/layout/AuthHeader/AuthHeader";
 import AuthTabs from "@/feature/auth/components/AuthTabs/AuthTabs";
 
 export default function AuthLayout({
@@ -7,8 +8,8 @@ export default function AuthLayout({
 }) {
   return (
     <div>
+      <AuthHeader />
       <AuthTabs />
-
       {children}
     </div>
   );

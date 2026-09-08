@@ -13,7 +13,7 @@ import { useTranslations } from "next-intl";
 import Button from "@/components/kit/Button/Button";
 import { useState } from "react";
 import { useRegister } from "../../hooks/useRegister";
-// import { useRegister } from "../../hooks/useRegister";
+import toast from "react-hot-toast";
 
 export function RegisterForm() {
   const t = useTranslations("Register");
@@ -27,7 +27,6 @@ export function RegisterForm() {
     register,
     handleSubmit,
     setValue,
-    watch,
     reset,
     formState: { errors },
   } = useForm<RegisterFormValues>({
@@ -38,17 +37,6 @@ export function RegisterForm() {
     },
   });
 
-  const isTeacher = watch("is_teacher");
-
-  // const handleRoleChange = (
-  //   _event: React.SyntheticEvent,
-  //   newValue: "student" | "teacher",
-  // ) => {
-  //   setValue("is_teacher", newValue === "teacher", {
-  //     shouldValidate: true,
-  //     shouldDirty: true,
-  //   });
-  // };
   const handleRoleSelect = (role: "student" | "teacher" | "admin") => {
     setSelectedRole(role);
     setValue("is_teacher", role === "teacher", {
@@ -57,34 +45,6 @@ export function RegisterForm() {
     });
   };
 
-  //   const onSubmit = (data: RegisterFormValues) => {
-  //     console.log("FORM DATA:", data);
-  //     const requestData = {
-  //       email: data.email,
-  //       password: data.password,
-  //       first_name: data.first_name,
-  //       last_name: data.last_name,
-  //       is_teacher: data.is_teacher,
-  //     };
-
-  //     console.log("BACKEND DATA:", requestData);
-
-  //     registerMutation.mutate(requestData, {
-  //   onSuccess: () => {
-  //     console.log("Success");
-  //   },
-
-  //   onError: () => {
-  //     console.log("Error");
-  //   },
-
-  //   onSettled: () => {
-  //     console.log("Request finished");
-  //   },
-  // });
-  //      reset();
-
-  //   };
   const onSubmit = (data: RegisterFormValues) => {
     const requestData = {
       email: data.email,
@@ -93,9 +53,10 @@ export function RegisterForm() {
       last_name: data.last_name,
       is_teacher: data.is_teacher,
     };
-
     registerMutation.mutate(requestData, {
       onSuccess: () => {
+        toast.success("Registration successful!");
+
         reset({
           is_teacher: false,
         });
@@ -104,23 +65,18 @@ export function RegisterForm() {
       },
 
       onError: (error) => {
+        toast.error("Registration failed!");
         console.log("Register error:", error);
+      },
+
+      onSettled: () => {
+        console.log("Register request finished");
       },
     });
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-      {/* <Tabs
-        value={isTeacher ? "teacher" : "student"}
-        onChange={handleRoleChange}
-        variant="fullWidth"
-        className={styles.tabs}
-      >
-        <Tab value="student" label={t("student")}   className={styles.tab} />
-
-        <Tab value="teacher" label={t("teacher")}   className={styles.tab} />
-      </Tabs> */}
       <div className={styles["btn-wrapper"]}>
         <Button
           type="button"
@@ -203,12 +159,11 @@ export function RegisterForm() {
       <Button
         type="submit"
         variant="contained"
-        // size="md"
-        // color="brand"
         fullWidth
         loading={registerMutation.isPending}
+        disabled={registerMutation.isPending}
       >
-        {t("submit")}
+        {t("create account")}
       </Button>
     </form>
   );
