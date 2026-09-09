@@ -4,7 +4,7 @@ type TranslateFunction = (key: string) => string;
 
 export const createLogInSchema = (t: TranslateFunction) =>
   z.object({
-    email: z.string(),
+    email: z.email(t("emailInvalid")),
 
     password: z.string().min(8, t("passwordMin")),
   });

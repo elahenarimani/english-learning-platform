@@ -65,7 +65,9 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={messages}>
           <QueryProvider>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-              <AppRouterCacheProvider>{children}</AppRouterCacheProvider>
+              <AppRouterCacheProvider>
+                {children}
+              </AppRouterCacheProvider>
               <Toaster position="top-center" />
             </ThemeProvider>
           </QueryProvider>

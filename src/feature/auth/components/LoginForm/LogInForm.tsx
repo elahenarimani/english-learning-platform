@@ -13,37 +13,67 @@ import { useTranslations } from "next-intl";
 import Button from "@/components/kit/Button/Button";
 import { useLogin } from "../../hooks/useLogin";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import { useLocale } from "next-intl";
+import { useMe } from "../../hooks/useMe";
+import axios from "axios";
 
 export function LogInForm() {
+  const { refetch: getCurrentUser } = useMe();
   const t = useTranslations("Register");
   const loginSchema = createLogInSchema(t);
-  const loginMutation = useLogin()
+  const loginMutation = useLogin();
+  const router = useRouter();
+  const locale = useLocale();
   const {
-     register,
+    register,
     handleSubmit,
-    setValue,
-    reset,
     formState: { errors },
   } = useForm<LogInFormValues>({
     resolver: zodResolver(loginSchema),
   });
 
- const onSubmit = (data: LogInFormValues) => {
-  loginMutation.mutate(data, {
-    onSuccess: () => {
-      toast.success("Login successful!");
-    },
+  const onSubmit = (data: LogInFormValues) => {
+    loginMutation.mutate(data, {
+      onSuccess: async () => {
+        try {
+          const { data: user } = await getCurrentUser();
+          console.log("user", user);
+          toast.success(t("welcomeBack", { name: user.first_name }));
+          if (user.is_teacher) {
+            router.replace(`/${locale}/dashboard/teacher`);
+          } else {
+            router.replace(`/${locale}/dashboard/student`);
+          }
+        } catch (error) {
+          toast.error(t("unableToGetUserInfo"));
+          console.error(error);
+        }
+      },
 
-    onError: (error) => {
-      toast.error("Login failed!");
-      console.log("Login error:", error);
-    },
+      onError: (error) => {
+        if (axios.isAxiosError(error)) {
+          const detail = error.response?.data?.detail;
 
-    onSettled: () => {
-      console.log("Login request finished");
-    },
-  });
-};
+          if (
+            error.response?.status === 401 &&
+            detail === "No active account found with the given credentials"
+          ) {
+            toast.error(t("invalidCredentials"));
+            return;
+          }
+        }
+
+        toast.error(t("loginFailed"));
+        console.error("Login error:", error);
+      },
+
+      onSettled: () => {
+        console.log("Login request finished");
+      },
+    });
+  };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
       <Input
@@ -62,12 +92,15 @@ export function LogInForm() {
         helperText={errors.password?.message}
       />
 
-      <Button  type="submit"
+      <Button
+        type="submit"
         variant="contained"
         fullWidth
         loading={loginMutation.isPending}
         disabled={loginMutation.isPending}
-        >{t("log in")}</Button>
+      >
+        {t("log in")}
+      </Button>
     </form>
   );
 }

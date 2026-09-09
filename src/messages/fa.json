@@ -14,7 +14,7 @@
     "admin": "ادمین",
     "confirmPassword": "تکرار رمز عبور",
     "create account": "ساخت حساب",
-    "log in":"ورود",
+    "log in": "ورود",
     "registering": "در حال ساخت حساب...",
     "registerError": "ساخت حساب با خطا مواجه شد",
     "registerSuccess": "حساب شما با موفقیت ساخته شد",
@@ -30,8 +30,11 @@
     "Registration successful!": "ثبت‌نام شما با موفقیت انجام شد.",
     "Registration failed!": "ثبت‌نام انجام نشد. لطفاً دوباره تلاش کنید.",
     "Register request finished": "فرآیند ثبت‌نام به پایان رسید.",
-     "Log in successful!":"ورود شما با موفقیت انجام شد",
-    "Log in failed!":"ورود انجام نشد لطفا دوباره تلاش کنید",
-    "Log in request finished":"فرآیند ورود با موفقیت انجام شد"
+    "Log in successful!": "ورود شما با موفقیت انجام شد",
+    "Log in failed!": "ورود انجام نشد لطفا دوباره تلاش کنید",
+    "Log in request finished": "فرآیند ورود با موفقیت انجام شد",
+    "welcomeBack": "خوش آمدید، {name}!",
+    "unableToGetUserInfo": "دریافت اطلاعات کاربر امکان‌پذیر نیست.",
+    "invalidCredentials": "ایمیل یا رمز عبور نادرست است."
   }
 }

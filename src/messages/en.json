@@ -32,6 +32,9 @@
     "Register request finished":"Register request finished",
     "Log in successful!":"Log in successful!",
     "Log in failed!":"Log in failed!",
-    "Log in request finished":"Log in request finished"
+    "Log in request finished":"Log in request finished",
+     "welcomeBack": "welcomeBack ، {name}!",
+    "unableToGetUserInfo": "unableToGetUserInfo",
+    "invalidCredentials": "Invalid email or password."
   }
 }
