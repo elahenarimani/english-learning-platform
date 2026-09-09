@@ -36,5 +36,13 @@
      "welcomeBack": "welcomeBack ، {name}!",
     "unableToGetUserInfo": "unableToGetUserInfo",
     "invalidCredentials": "Invalid email or password."
+  },
+    "Header": {
+    "dashboard": "Dashboard",
+    "myCourses": "My Courses",
+    "homework": "Homework",
+    "payment": "Payment",
+    "profile": "Profile",
+    "logout": "Logout"
   }
 }

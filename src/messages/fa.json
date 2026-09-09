@@ -36,5 +36,13 @@
     "welcomeBack": "خوش آمدید، {name}!",
     "unableToGetUserInfo": "دریافت اطلاعات کاربر امکان‌پذیر نیست.",
     "invalidCredentials": "ایمیل یا رمز عبور نادرست است."
+  },
+    "Header": {
+    "dashboard": "داشبورد",
+    "myCourses": "دوره‌های من",
+    "homework": "تکالیف",
+    "payment": "پرداخت",
+    "profile": "پروفایل",
+    "logout": "خروج"
   }
 }

@@ -1,0 +1,73 @@
+@use "../../../styles/tokens/index.scss" as var;
+
+.header-wrapper {
+  width: 100%;
+  height: 70px;
+  padding: 0 var.$space-4;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .flex-item {
+    display: flex;
+    align-items: center;
+    gap: var.$space-2;
+  }
+
+  .icon-button {
+    width: var.$space-12;
+    height: var.$space-12;
+    min-width: var.$space-12;
+
+    padding: 0;
+
+    border-radius: var.$radius-full !important;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.text {
+      background-color: var(--color-surface) !important;
+    }
+  }
+}
+
+.drawer {
+  width: 50vw;
+  height: 100%;
+}
+
+.menu-list {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 0;
+
+  :global(.MuiListItemButton-root) {
+    padding-left: var.$space-3;
+    padding-right: var.$space-3;
+    gap: var.$space-1 !important;
+  }
+
+  :global(.MuiListItemIcon-root) {
+    min-width: 20px;
+    width: 20px;
+    height: 20px;
+
+    margin: 0;
+    padding: 0;
+  }
+
+  :global(.MuiListItemText-root) {
+    margin: 0;
+  }
+}
+
+.logout {
+  margin-top: auto;
+}

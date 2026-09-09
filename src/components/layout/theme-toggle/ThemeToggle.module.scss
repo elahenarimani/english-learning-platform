@@ -1,4 +1,6 @@
 @use "../../../styles//tokens/index.scss" as var;
 .button {
   border-radius: var.$radius-full !important;
+  width: var.$space-12 !important;
+  height: var.$space-12 !important;
 }
