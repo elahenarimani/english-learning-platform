@@ -41,33 +41,38 @@
 
 .menu-list {
   width: 100%;
-  height: 100%;
 
   display: flex;
   flex-direction: column;
+  gap: var.$space-2;
 
   padding: 0;
 
   :global(.MuiListItemButton-root) {
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
     padding-left: var.$space-3;
     padding-right: var.$space-3;
+
     gap: var.$space-1 !important;
   }
 
   :global(.MuiListItemIcon-root) {
-    min-width: 20px;
-    width: 20px;
-    height: 20px;
+    min-width: 20px !important;
+    width: 20px !important;
+    height: 20px !important;
 
-    margin: 0;
-    padding: 0;
+    margin: 0 !important;
+    padding: 0 !important;
+
+    flex: 0 0 20px;
   }
 
   :global(.MuiListItemText-root) {
-    margin: 0;
+    margin: 0 !important;
+    flex: 0 0 auto !important;
+    width: auto !important;
   }
-}
-
-.logout {
-  margin-top: auto;
 }

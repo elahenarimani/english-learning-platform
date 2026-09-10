@@ -1,6 +1,8 @@
 "use client";
 
+import { useLogout } from "@/feature/auth/hooks/useLogout";
 import { useEffect, useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import {
   Menu,
   Layers,
@@ -26,17 +28,19 @@ import { ThemeToggle } from "../theme-toggle/ThemeToggle";
 import Button from "@/components/kit/Button/Button";
 import { useMe } from "@/feature/auth/hooks/useMe";
 import { useLocale, useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 export function Header() {
-  const { data: user, refetch } = useMe();
+  const { data: user } = useMe();
   const locale = useLocale();
   const isRtl = locale === "fa";
+  const logoutMutation = useLogout();
+  const router = useRouter();
+  const queryClient = useQueryClient();
   const drawerAnchor = isRtl ? "right" : "left";
   const [menuOpen, setMenuOpen] = useState(false);
-const t = useTranslations("Header");
-  useEffect(() => {
-    refetch();
-  }, [refetch]);
+  const t = useTranslations("Header");
 
   const handleOpenMenu = () => {
     setMenuOpen(true);
@@ -45,8 +49,25 @@ const t = useTranslations("Header");
   const handleCloseMenu = () => {
     setMenuOpen(false);
   };
-  console.log("locale:", locale);
-  console.log("drawerAnchor:", drawerAnchor);
+  const handleLogout = () => {
+    logoutMutation.mutate(undefined, {
+      onSuccess: () => {
+        queryClient.removeQueries({
+          queryKey: ["me"],
+        });
+
+        toast.success(t("logoutSuccess"));
+
+        router.replace(`/${locale}/login`);
+      },
+
+      onError: (error) => {
+        console.error("Logout error:", error);
+
+        toast.error(t("logoutError"));
+      },
+    });
+  };
   return (
     <>
       <div className={styles["header-wrapper"]}>
@@ -105,7 +126,7 @@ const t = useTranslations("Header");
                 <FileText size={18} />
               </ListItemIcon>
 
-               <ListItemText primary={t("homework")} />
+              <ListItemText primary={t("homework")} />
             </ListItemButton>
 
             <ListItemButton onClick={handleCloseMenu}>
@@ -121,15 +142,16 @@ const t = useTranslations("Header");
                 <User size={18} />
               </ListItemIcon>
 
-            <ListItemText primary={t("profile")} />
+              <ListItemText primary={t("profile")} />
             </ListItemButton>
 
-            <ListItemButton onClick={handleCloseMenu}
-            className={styles.logout}>
+            <ListItemButton
+              onClick={handleLogout}
+              disabled={logoutMutation.isPending}
+            >
               <ListItemIcon>
                 <LogOut size={18} />
               </ListItemIcon>
-
               <ListItemText primary={t("logout")} />
             </ListItemButton>
           </List>

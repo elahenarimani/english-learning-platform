@@ -41,3 +41,9 @@ export const getMe = async () => {
 
   return response.data;
 };
+
+export const logoutUser = async () => {
+  const response = await apiClient.post("/logout/");
+
+  return response.data;
+};

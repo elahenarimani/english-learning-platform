@@ -43,6 +43,8 @@
     "homework": "تکالیف",
     "payment": "پرداخت",
     "profile": "پروفایل",
-    "logout": "خروج"
+ "logout": "خروج",
+    "logoutSuccess": "با موفقیت خارج شدید",
+    "logoutError": "خروج از حساب کاربری ناموفق بود"    
   }
 }

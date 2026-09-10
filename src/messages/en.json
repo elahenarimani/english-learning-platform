@@ -43,6 +43,8 @@
     "homework": "Homework",
     "payment": "Payment",
     "profile": "Profile",
-    "logout": "Logout"
+    "logout": "Logout",
+      "logoutSuccess": "You have been logged out successfully",
+    "logoutError": "Failed to log out"
   }
 }
