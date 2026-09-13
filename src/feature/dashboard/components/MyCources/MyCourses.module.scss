@@ -1,0 +1,41 @@
+@use "../../../../styles//tokens//index.scss" as var;
+.card-wrapper {
+  display: grid ;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var.$space-6;
+  width: 100%;
+  max-width: 80%;
+  margin: 0 auto;
+  padding:  var.$space-5;
+
+  .card {
+    padding: var.$space-6;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .course-name-button {
+        background-color: #e8f5f2;
+        color: #0f7a69;
+        .course-status {
+          padding: var.$space-2 var.$space-3;
+          border-radius: var(--radius-md);
+          background-color: #e8f5f2;
+          color: var(--color-brand);
+        }
+      }
+    }
+
+    .card-title {
+      margin-top: var.$space-4;
+    }
+
+    .card-date {
+      margin-top: var.$space-2;
+    }
+  }
+}

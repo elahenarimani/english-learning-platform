@@ -37,14 +37,36 @@
     "unableToGetUserInfo": "دریافت اطلاعات کاربر امکان‌پذیر نیست.",
     "invalidCredentials": "ایمیل یا رمز عبور نادرست است."
   },
-    "Header": {
+  "Header": {
     "dashboard": "داشبورد",
     "myCourses": "دوره‌های من",
     "homework": "تکالیف",
     "payment": "پرداخت",
     "profile": "پروفایل",
- "logout": "خروج",
+    "logout": "خروج",
     "logoutSuccess": "با موفقیت خارج شدید",
-    "logoutError": "خروج از حساب کاربری ناموفق بود"    
+    "logoutError": "خروج از حساب کاربری ناموفق بود"
+  },
+   "NotFound": {
+    "title": "صفحه پیدا نشد",
+    "description": "صفحه‌ای که به دنبال آن هستید وجود ندارد.",
+    "backToHome": "بازگشت به صفحه اصلی"
+  },
+    "Loading": {
+    "message": "در حال بارگذاری..."
+  },
+  "ErrorMessage": {
+    "message": "خطایی رخ داده است.",
+    "retry": "تلاش مجدد"
+  },
+   "Dashboard": {
+    "loading": "در حال بارگذاری داشبورد..."
+  },
+   "StudentDashboard": {
+    "loading": "در حال بارگذاری داشبورد دانشجو..."
+  },
+   "Error": {
+    "title": "مشکلی پیش آمده است!",
+    "tryAgain": "تلاش مجدد"
   }
 }

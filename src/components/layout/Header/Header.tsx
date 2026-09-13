@@ -49,6 +49,15 @@ export function Header() {
   const handleCloseMenu = () => {
     setMenuOpen(false);
   };
+  const handleNavigation = (path: string) => {
+  handleCloseMenu();
+
+  router.push(
+    path
+      ? `/${locale}/dashboard/student/${path}`
+      : `/${locale}/dashboard/student`
+  );
+};
   const handleLogout = () => {
     logoutMutation.mutate(undefined, {
       onSuccess: () => {
@@ -105,7 +114,7 @@ export function Header() {
       <Drawer anchor={drawerAnchor} open={menuOpen} onClose={handleCloseMenu}>
         <div className={styles["drawer"]}>
           <List className={styles["menu-list"]}>
-            <ListItemButton onClick={handleCloseMenu}>
+            <ListItemButton onClick={() => handleNavigation("")}>
               <ListItemIcon>
                 <LayoutDashboard size={18} />
               </ListItemIcon>
@@ -113,7 +122,7 @@ export function Header() {
               <ListItemText primary={t("dashboard")} />
             </ListItemButton>
 
-            <ListItemButton onClick={handleCloseMenu}>
+            <ListItemButton onClick={() => handleNavigation("courses")}>
               <ListItemIcon>
                 <BookOpen size={18} />
               </ListItemIcon>
@@ -121,7 +130,7 @@ export function Header() {
               <ListItemText primary={t("myCourses")} />
             </ListItemButton>
 
-            <ListItemButton onClick={handleCloseMenu}>
+            <ListItemButton onClick={() => handleNavigation("assignments")}>
               <ListItemIcon>
                 <FileText size={18} />
               </ListItemIcon>
@@ -129,7 +138,7 @@ export function Header() {
               <ListItemText primary={t("homework")} />
             </ListItemButton>
 
-            <ListItemButton onClick={handleCloseMenu}>
+            <ListItemButton onClick={() => handleNavigation("payment")}>
               <ListItemIcon>
                 <CreditCard size={18} />
               </ListItemIcon>
@@ -137,7 +146,7 @@ export function Header() {
               <ListItemText primary={t("payment")} />
             </ListItemButton>
 
-            <ListItemButton onClick={handleCloseMenu}>
+            <ListItemButton onClick={() => handleNavigation("profile")}>
               <ListItemIcon>
                 <User size={18} />
               </ListItemIcon>

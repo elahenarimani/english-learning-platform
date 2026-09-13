@@ -1,6 +1,9 @@
-import { apiClient } from "@/lib/api/apiClient"
+import { useQuery } from "@tanstack/react-query";
+import { getStudentDashboard } from "../api/dashboard.api";
 
-export const getStudentDashboard =async()=>{
-    const response = await apiClient.get("/students/me/dashboard/");
-    return response.data;
-}
+export const useStudentDashboard = () => {
+  return useQuery({
+    queryKey: ["student-dashboard"],
+    queryFn:getStudentDashboard,
+  });
+};

@@ -1,4 +1,5 @@
-import Spinner from "@/components/kit/Spinner/Spinner";
+
+import StudentSkeleton from "@/components/shared/skeletons/StudentSkeleton/StudentSkeleton";
 import { useTranslations } from "next-intl";
 
 type LoadingProps = {
@@ -21,7 +22,7 @@ export default function Loading({ message }: LoadingProps) {
         gap: "12px",
       }}
     >
-      <Spinner />
+      <StudentSkeleton />
 
       <span>{message ?? t("message")}</span>
     </div>

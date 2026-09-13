@@ -20,9 +20,9 @@ import axios from "axios";
 
 export function LogInForm() {
   const { refetch: getCurrentUser } = useMe();
+  const loginMutation = useLogin();
   const t = useTranslations("Register");
   const loginSchema = createLogInSchema(t);
-  const loginMutation = useLogin();
   const router = useRouter();
   const locale = useLocale();
   const {

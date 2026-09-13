@@ -14,7 +14,7 @@
     "admin": "admin",
     "confirmPassword": "Confirm password",
     "create account": "Create account",
-    "log in":"log in",
+    "log in": "log in",
     "registering": "Creating account...",
     "registerError": "Registration failed",
     "registerSuccess": "Account created successfully",
@@ -26,25 +26,47 @@
     "passwordMin": "Password must be at least 8 characters",
     "confirmPasswordMin": "Confirm password is required",
     "passwordMismatch": "Password and confirmation do not match",
-    "roleRequired":"roleRequired",
-    "Registration successful!":"Registration successful!",
-    "Registration failed!":"Registration failed!",
-    "Register request finished":"Register request finished",
-    "Log in successful!":"Log in successful!",
-    "Log in failed!":"Log in failed!",
-    "Log in request finished":"Log in request finished",
-     "welcomeBack": "welcomeBack ، {name}!",
+    "roleRequired": "roleRequired",
+    "Registration successful!": "Registration successful!",
+    "Registration failed!": "Registration failed!",
+    "Register request finished": "Register request finished",
+    "Log in successful!": "Log in successful!",
+    "Log in failed!": "Log in failed!",
+    "Log in request finished": "Log in request finished",
+    "welcomeBack": "welcomeBack ، {name}!",
     "unableToGetUserInfo": "unableToGetUserInfo",
     "invalidCredentials": "Invalid email or password."
   },
-    "Header": {
+  "Header": {
     "dashboard": "Dashboard",
     "myCourses": "My Courses",
     "homework": "Homework",
     "payment": "Payment",
     "profile": "Profile",
     "logout": "Logout",
-      "logoutSuccess": "You have been logged out successfully",
+    "logoutSuccess": "You have been logged out successfully",
     "logoutError": "Failed to log out"
+  },
+  "NotFound": {
+    "title": "Page Not Found",
+    "description": "The page you are looking for does not exist.",
+    "backToHome": "Back to Home"
+  },
+    "Loading": {
+    "message": "Loading..."
+  },
+  "ErrorMessage": {
+    "message": "Something went wrong.",
+    "retry": "Try again"
+  },
+   "Dashboard": {
+    "loading": "Loading dashboard..."
+  },
+   "StudentDashboard": {
+    "loading": "Loading student dashboard..."
+  },
+    "Error": {
+    "title": "Something went wrong!",
+    "tryAgain": "Try again"
   }
 }

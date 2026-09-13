@@ -9,9 +9,6 @@ export function LanguageSwitcher() {
   const router = useRouter();
   const pathname = usePathname();
   const locale = useLocale();
-  console.log("router:",router)
-  console.log("pthname:",pathname)
-  console.log("local:",locale)
 
   const changeLanguage = () => {
     const nextLocale = locale === "fa" ? "en" : "fa";
