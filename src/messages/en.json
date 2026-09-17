@@ -68,5 +68,14 @@
     "Error": {
     "title": "Something went wrong!",
     "tryAgain": "Try again"
+  },
+    "MyCourses": {
+    "title": "Courses in Progress",
+    "empty": "You haven't enrolled in any courses yet.",
+    "status": {
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "pending_payment": "Pending Payment"
+    }
   }
 }

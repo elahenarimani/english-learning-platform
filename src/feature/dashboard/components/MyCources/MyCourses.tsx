@@ -1,115 +1,89 @@
 "use client";
 
-import Button from "@/components/kit/Button/Button";
-// import { useEnrollments } from "../../hooks/useEnrollments";
+import clsx from "clsx";
+import { BookOpen, Calendar, CheckCircle, Clock, XCircle } from "lucide-react";
+import { useTranslations } from "next-intl";
+
 import styles from "./MyCourses.module.scss";
-import StudentSkeleton from "@/components/shared/skeletons/StudentSkeleton/StudentSkeleton";
 import { Enrollment } from "../../types/enrollment.types";
-  interface MyCoursesProps {
+import { formatPersianDate } from "@/lib/utils/date";
+
+interface MyCoursesProps {
   data: Enrollment[];
 }
 
 const MyCourses = ({ data }: MyCoursesProps) => {
+  const t = useTranslations("MyCourses");
 
+  const statusIcons = {
+    approved: CheckCircle,
+    rejected: XCircle,
+    pending_payment: Clock,
+  };
 
-  // const { data, isLoading, isError } = useEnrollments();
-
-  // console.log("Enrollments:", data);
-  // console.log("loading:", isLoading);
-  // console.log("error:", isError);
-
-  // if (isLoading) {
-  //   return <StudentSkeleton />;
-  // }
-
-  // if (isError) {
-  //   return <p>Error loading courses.</p>;
-  // }
-
-  // if (!data || data.length === 0) {
-  //   return <p>No courses found.</p>;
-  // }
-
-//   return (
-//     <>
-//       <p>My Courses</p>
-
-//       <div className={styles["card-wrapper"]}>
-//         {data.map((enrollment: Enrollment) => (
-//           <div className={styles.card} key={enrollment.id}>
-//             <div className={styles["card-header"]}>
-//               <Button
-//                 variant="contained"
-//                 className={styles["course-name-button"]}
-//               >
-//                 {enrollment.course.title}
-//               </Button>
-
-//               <Button variant="contained" className={styles["course-status"]}>
-//                 {enrollment.status}
-//               </Button>
-//             </div>
-
-//             <h3 className={styles["card-title"]}>{enrollment.course.title}</h3>
-
-//             <p className={styles["card-date"]}>{enrollment.submitted_at}</p>
-
-//             <Button variant="text" className={styles["course-name-button"]}>
-//               {enrollment.course.courseId}
-//             </Button>
-//           </div>
-//         ))}
-//       </div>
-//     </>
-//   );
-// };
-
-// export default MyCourses;
- if (!data || data.length === 0) {
-    return <p>No courses found.</p>;
+  if (!data || data.length === 0) {
+    return (
+      <div className={styles["empty-wrapper"]}>
+        <BookOpen size={60} />
+        <p>{t("empty")}</p>
+      </div>
+    );
   }
 
   return (
-    <>
-      <p>My Courses</p>
+    <section className={styles["course-wrapper"]}>
+      <h2 className={styles.title}>{t("title")}</h2>
 
       <div className={styles["card-wrapper"]}>
-        {data.map((enrollment) => (
-          <div className={styles.card} key={enrollment.id}>
-            <div className={styles["card-header"]}>
-              <Button
-                variant="contained"
-                className={styles["course-name-button"]}
-              >
-                {enrollment.course.title}
-              </Button>
+        {data.map((enrollment) => {
+          const status = enrollment.status?.toLowerCase();
 
-              <Button
-                variant="contained"
-                className={styles["course-status"]}
-              >
-                {enrollment.status}
-              </Button>
-            </div>
-
-            <h3 className={styles["card-title"]}>
-              {enrollment.course.title}
-            </h3>
-
-            <p className={styles["card-date"]}>
-              {enrollment.submitted_at}
-            </p>
-
-            <Button
-              variant="text"
-              className={styles["course-name-button"]}
+          const StatusIcon = status
+            ? statusIcons[status as keyof typeof statusIcons]
+            : null;
+          const persianDate = formatPersianDate(enrollment.submitted_at);
+          return (
+            <div
+              className={clsx(
+                styles.card,
+                status && styles[`card-status-${status}`],
+              )}
+              key={enrollment.id}
             >
-              {enrollment.course.courseId}
-            </Button>
-          </div>
-        ))}
+              {/* Course title + status */}
+
+              <div className={styles["card-header"]}>
+                <span className={styles["course-id"]}>
+                  {enrollment.course.courseId}
+                </span>
+                <div
+                  className={clsx(
+                    styles["course-status"],
+                    status && styles[`status-${status}`],
+                  )}
+                >
+                  {StatusIcon && <StatusIcon size={16} />}
+                  <span>{status ? t(`status.${status}`) : ""}</span>
+                </div>
+              </div>
+              <h3 className={styles["card-title"]}>
+                {enrollment.course.title}
+              </h3>
+              {/* Submitted date */}
+              <div className={styles["date-wrapper"]}>
+                <Calendar className={styles["calendar-icon"]} size={18} />
+
+                <p className={styles["card-date"]} dir="ltr">
+                  <span>{persianDate.year}</span>{" "}
+                   <span dir="rtl">{persianDate.month}</span>{" "}
+                  <span>{persianDate.day}</span>{" "}
+                </p>
+              </div>
+            </div>
+          );
+        })}
       </div>
-    </>
+    </section>
   );
 };
 
