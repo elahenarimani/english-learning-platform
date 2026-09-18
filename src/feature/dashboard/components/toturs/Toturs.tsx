@@ -1,0 +1,84 @@
+"use client";
+
+// import clsx from "clsx";
+// import { BookOpen, Calendar, CheckCircle, Clock, XCircle } from "lucide-react";
+import { useTranslations } from "next-intl";
+
+import styles from "./Toturs.module.scss";
+import { Tutor } from "../../types/toturstypes";
+import { User } from "lucide-react";
+// import { Enrollment } from "../../types/enrollment.types";
+// import { formatPersianDate } from "@/lib/utils/date";
+import Image from "next/image";
+import Button from "@/components/kit/Button/Button";
+interface totursProps {
+  data: Tutor[];
+}
+
+const Toturs = ({ data }: totursProps) => {
+  const t = useTranslations("tutors");
+  console.log("toturs:", data);
+
+  if (!data || data.length === 0) {
+    return (
+      <div className={styles["empty-wrapper"]}>
+        <User size={60} />
+        <p>{t("empty")}</p>
+      </div>
+    );
+  }
+  return (
+    <section className={styles["totur-wrapper"]}>
+      <h2 className={styles.title}>{t("title")}</h2>
+      <p>{t("description")}</p>
+      <div className={styles["card-wrapper"]}>
+        {data.map((toturs) => {
+          console.log("profile_picture:", toturs.profile_picture);
+          const languages = toturs.languages_spoken;
+
+          let firstLanguage = "";
+
+          if (Array.isArray(languages)) {
+            if (languages.length > 0) {
+              const first = languages[0];
+
+              if (typeof first === "string") {
+                firstLanguage = first;
+              } else {
+                firstLanguage = first.language;
+              }
+            }
+          } else {
+            firstLanguage = Object.keys(languages)[0] ?? "";
+          }
+          return (
+            <div key={toturs.id} className={styles.card}>
+              <div className={styles["profile-image-wrapper"]}>
+                {toturs.profile_picture ? (
+                  <Image
+                    src={toturs.profile_picture}
+                    alt={`${toturs.user.first_name} ${toturs.user.last_name}`}
+                    fill
+                    sizes="120px"
+                    className={styles["profile-image"]}
+                  />
+                ) : (
+                  <div className={styles["profile-placeholder"]}>No Image</div>
+                )}
+              </div>
+              <p>{firstLanguage}</p>
+
+              <p>
+                {toturs.user.first_name} {toturs.user.last_name}
+              </p>
+              {/* <p>{toturs.user.first_name}</p> */}
+              <Button>مشاهده کامل پروفایل</Button>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+};
+
+export default Toturs;

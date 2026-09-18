@@ -1,13 +1,13 @@
 
 import StudentSkeleton from "@/components/shared/skeletons/StudentSkeleton/StudentSkeleton";
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 
 type LoadingProps = {
   message?: string;
 };
 
-export default function Loading({ message }: LoadingProps) {
-  const t = useTranslations("Loading");
+export default async function Loading({ message }: LoadingProps) {
+  const t = await getTranslations("Loading");
 
   return (
     <div
@@ -24,7 +24,7 @@ export default function Loading({ message }: LoadingProps) {
     >
       <StudentSkeleton/>
 
-      <span>{message ?? t("message")}</span>
+      <p>{message || t("message")}</p>
     </div>
   );
 }

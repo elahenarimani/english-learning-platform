@@ -14,7 +14,7 @@
     "admin": "ادمین",
     "confirmPassword": "تکرار رمز عبور",
     "create account": "ساخت حساب",
-    "log in": "ورود",
+    "login": "ورود",
     "registering": "در حال ساخت حساب...",
     "registerError": "ساخت حساب با خطا مواجه شد",
     "registerSuccess": "حساب شما با موفقیت ساخته شد",
@@ -30,46 +30,49 @@
     "Registration successful!": "ثبت‌نام شما با موفقیت انجام شد.",
     "Registration failed!": "ثبت‌نام انجام نشد. لطفاً دوباره تلاش کنید.",
     "Register request finished": "فرآیند ثبت‌نام به پایان رسید.",
-    "Log in successful!": "ورود شما با موفقیت انجام شد",
-    "Log in failed!": "ورود انجام نشد لطفا دوباره تلاش کنید",
-    "Log in request finished": "فرآیند ورود با موفقیت انجام شد",
+    "loginFailed": "ورود انجام نشد، لطفاً دوباره تلاش کنید",
+    "loginFailed!": "ورود انجام نشد، لطفاً دوباره تلاش کنید",
+    "Loginfailed!": "ورود انجام نشد، لطفاً دوباره تلاش کنید",
+    "loginSuccess": "ورود شما با موفقیت انجام شد",
+    "Loginrequest finished": "فرآیند ورود با موفقیت انجام شد",
     "welcomeBack": "خوش آمدید، {name}!",
     "unableToGetUserInfo": "دریافت اطلاعات کاربر امکان‌پذیر نیست.",
     "invalidCredentials": "ایمیل یا رمز عبور نادرست است."
   },
   "Header": {
-    "dashboard": "داشبورد",
+    "dashboard": "داشبورد دانش آموز",
     "myCourses": "دوره‌های من",
     "homework": "تکالیف",
     "payment": "پرداخت",
     "profile": "پروفایل",
     "logout": "خروج",
     "logoutSuccess": "با موفقیت خارج شدید",
-    "logoutError": "خروج از حساب کاربری ناموفق بود"
+    "logoutError": "خروج از حساب کاربری ناموفق بود",
+    "toturs": "اساتید"
   },
-   "NotFound": {
+  "NotFound": {
     "title": "صفحه پیدا نشد",
     "description": "صفحه‌ای که به دنبال آن هستید وجود ندارد.",
     "backToHome": "بازگشت به صفحه اصلی"
   },
-    "Loading": {
+  "Loading": {
     "message": "در حال بارگذاری..."
   },
   "ErrorMessage": {
     "message": "خطایی رخ داده است.",
     "retry": "تلاش مجدد"
   },
-   "Dashboard": {
+  "Dashboard": {
     "loading": "در حال بارگذاری داشبورد..."
   },
-   "StudentDashboard": {
+  "StudentDashboard": {
     "loading": "در حال بارگذاری داشبورد دانشجو..."
   },
-   "Error": {
+  "Error": {
     "title": "مشکلی پیش آمده است!",
     "tryAgain": "تلاش مجدد"
   },
-    "MyCourses": {
+  "MyCourses": {
     "title": "دوره‌های در حال یادگیری",
     "empty": "شما هنوز در هیچ دوره‌ای ثبت‌نام نکرده‌اید.",
     "status": {
@@ -77,5 +80,9 @@
       "rejected": "رد شده",
       "pending_payment": "در انتظار پرداخت"
     }
-  }
+  },
+ "tutors": {
+  "title": "اساتید برتر ما",
+  "description": "از بین اساتید تأیید شده، استاد موردنظر خود را انتخاب کنید."
+}
 }

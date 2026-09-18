@@ -4,15 +4,15 @@ import clsx from "clsx";
 import { BookOpen, Calendar, CheckCircle, Clock, XCircle } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-import styles from "./MyCourses.module.scss";
+import styles from "./StudentDashboard.module.scss";
 import { Enrollment } from "../../types/enrollment.types";
 import { formatPersianDate } from "@/lib/utils/date";
 
-interface MyCoursesProps {
+interface StudentsProps {
   data: Enrollment[];
 }
 
-const MyCourses = ({ data }: MyCoursesProps) => {
+const StudentDashboard = ({ data }: StudentsProps) => {
   const t = useTranslations("MyCourses");
 
   const statusIcons = {
@@ -37,7 +37,6 @@ const MyCourses = ({ data }: MyCoursesProps) => {
       <div className={styles["card-wrapper"]}>
         {data.map((enrollment) => {
           const status = enrollment.status?.toLowerCase();
-
           const StatusIcon = status
             ? statusIcons[status as keyof typeof statusIcons]
             : null;
@@ -87,4 +86,4 @@ const MyCourses = ({ data }: MyCoursesProps) => {
   );
 };
 
-export default MyCourses;
+export default StudentDashboard;

@@ -1,0 +1,204 @@
+@use "../../../../styles/tokens/index.scss" as var;
+.totur-wrapper {
+  width: 100%;
+  max-width: 80%;
+  margin: var.$space-4 auto;
+  .title {
+    text-align: start;
+    margin-bottom: var.$space-6;
+    font-size: var.$font-xl;
+    font-weight: var.$font-bold;
+  }
+
+  .card-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var.$space-6;
+    .card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      gap: var.$space-3;
+      padding: var.$space-6;
+
+      background-color: var(--color-surface);
+      border: 1px solid var(--color-brand);
+      border-top: 4px solid var(--color-brand);
+      border-radius: var(--radius-lg);
+      .profile-image-wrapper {
+        position: relative;
+        width: 120px;
+        height: 120px;
+        flex: 0 0 120px;
+        overflow: hidden;
+        border-radius: 50%;
+
+        .profile-image {
+          object-fit: cover;
+        }
+
+        .profile-placeholder {
+          width: 100%;
+          height: 100%;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          background-color: var(--color-background);
+          border-radius: 50%;
+        }
+      }
+
+      //     .card-title {
+      //       margin: 0;
+      //       text-align: center;
+      //     }
+      //     .card-header {
+      //       width: 100%;
+
+      //       display: flex;
+      //       flex-direction: row;
+      //       align-items: center;
+      //       justify-content: space-between;
+
+      //       gap: var.$space-3;
+
+      //       .course-id {
+      //         margin: 0;
+      //         height: 36px;
+      //         padding: 0 var.$space-2;
+
+      //         display: flex;
+      //         align-items: center;
+
+      //         font-size: var.$font-sm;
+      //         background-color: var(--color-background);
+      //         border-radius: var(--radius-sm);
+      //       }
+
+      //       .course-status {
+      //         height: 36px;
+
+      //         display: flex;
+      //         align-items: center;
+      //         justify-content: center;
+      //         gap: var.$space-2;
+
+      //         padding: 0 var.$space-3;
+
+      //         border: 1px solid transparent;
+      //         border-radius: var(--radius-md);
+      //       }
+      //       .status-rejected {
+      //         color: var(--color-lesson-rejected);
+      //         background-color: var(--color-lesson-rejected-background);
+      //         border-color: var(--color-lesson-rejected-border);
+      //       }
+      //       .status-canceled {
+      //         color: var(--color-lesson-canceled);
+      //         background-color: var(--color-lesson-canceled-background);
+      //         border-color: var(--color-lesson-canceled-border);
+      //       }
+      //       .status-approved {
+      //         color: var(--color-lesson-approved);
+      //         background-color: var(--color-lesson-approved-background);
+      //         border-color: var(--color-lesson-approved-border);
+      //       }
+      //       .status-pending_payment {
+      //         color: var(--color-lesson-pending);
+      //         background-color: var(--color-lesson-pending-background);
+      //         border-color: var(--color-lesson-pending-border);
+      //       }
+      //       .status-active {
+      //         color: var(--color-lesson-active);
+      //         background-color: var(--color-lesson-active-background);
+      //         border-color: var(--color-lesson-active-border);
+      //       }
+      //     }
+      //     .date-wrapper {
+      //       display: flex;
+      //       align-items: center;
+      //       justify-content: center;
+      //       gap: var.$space-2;
+      //     }
+      //     .calendar-icon {
+      //       flex-shrink: 0;
+      //     }
+      //     .card-date {
+      //       margin: 0;
+      //     }
+      //     .course-id {
+      //       margin-top: var.$space-4;
+      //       font-size: var.$font-sm;
+      //     }
+      //   } /* Dynamic Card Borders */
+      //   .card-status-rejected {
+      //     border-color: var(--color-lesson-rejected-border);
+      //   }
+      //   .card-status-canceled {
+      //     border-color: var(--color-lesson-canceled-border);
+      //   }
+      //   .card-status-approved {
+      //     border-color: var(--color-lesson-approved-border);
+      //   }
+      //   .card-status-pending_payment {
+      //     border-color: var(--color-lesson-pending-border);
+      //   }
+      //   .card-status-active {
+      //     border-color: var(--color-lesson-active-border);
+    }
+  }
+} /* Empty State */
+.empty-wrapper {
+  width: 100%;
+  max-width: 80%;
+  height: 250px;
+  margin: var.$space-8 auto;
+  padding: var.$space-8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var.$space-5;
+  text-align: center;
+  border: var.$border-width-thick dashed var(--color-border);
+  border-radius: var.$radius-lg;
+} /* ========================= Responsive ========================= */ /* Tablet */
+@media (max-width: 1024px) {
+  .course-wrapper {
+    max-width: 90%;
+    .card-wrapper {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var.$space-5;
+    }
+  }
+  .empty-wrapper {
+    max-width: 90%;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+}
+
+.empty-wrapper {
+  width: 100%;
+  max-width: 80%;
+  height: 250px;
+
+  margin: var.$space-8 auto;
+  padding: var.$space-8;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var.$space-5;
+
+  text-align: center;
+
+  border: var.$border-width-thick dashed var(--color-border);
+  border-radius: var.$radius-lg;
+}

@@ -14,7 +14,7 @@
     "admin": "admin",
     "confirmPassword": "Confirm password",
     "create account": "Create account",
-    "log in": "log in",
+    "login": "log in",
     "registering": "Creating account...",
     "registerError": "Registration failed",
     "registerSuccess": "Account created successfully",
@@ -30,46 +30,47 @@
     "Registration successful!": "Registration successful!",
     "Registration failed!": "Registration failed!",
     "Register request finished": "Register request finished",
-    "Log in successful!": "Log in successful!",
-    "Log in failed!": "Log in failed!",
-    "Log in request finished": "Log in request finished",
+    "Loginsuccessful!": "Log in successful!",
+    "Loginfailed!": "Log in failed!",
+    "Loginrequest finished": "Log in request finished",
     "welcomeBack": "welcomeBack ، {name}!",
     "unableToGetUserInfo": "unableToGetUserInfo",
     "invalidCredentials": "Invalid email or password."
   },
   "Header": {
-    "dashboard": "Dashboard",
+    "dashboard": "ُStudent Dashboard",
     "myCourses": "My Courses",
     "homework": "Homework",
     "payment": "Payment",
     "profile": "Profile",
     "logout": "Logout",
     "logoutSuccess": "You have been logged out successfully",
-    "logoutError": "Failed to log out"
+    "logoutError": "Failed to log out",
+    "toturs": "toturs"
   },
   "NotFound": {
     "title": "Page Not Found",
     "description": "The page you are looking for does not exist.",
     "backToHome": "Back to Home"
   },
-    "Loading": {
+  "Loading": {
     "message": "Loading..."
   },
   "ErrorMessage": {
     "message": "Something went wrong.",
     "retry": "Try again"
   },
-   "Dashboard": {
+  "Dashboard": {
     "loading": "Loading dashboard..."
   },
-   "StudentDashboard": {
+  "StudentDashboard": {
     "loading": "Loading student dashboard..."
   },
-    "Error": {
+  "Error": {
     "title": "Something went wrong!",
     "tryAgain": "Try again"
   },
-    "MyCourses": {
+  "MyCourses": {
     "title": "Courses in Progress",
     "empty": "You haven't enrolled in any courses yet.",
     "status": {
@@ -77,5 +78,9 @@
       "rejected": "Rejected",
       "pending_payment": "Pending Payment"
     }
-  }
+  },
+"tutors": {
+  "title": "Our Top Tutors",
+  "description": "Choose your preferred tutor from our verified tutors."
+}
 }

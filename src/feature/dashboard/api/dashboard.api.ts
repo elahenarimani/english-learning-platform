@@ -1,7 +1,7 @@
 import { apiClient } from "@/lib/api/apiClient"
 import { EnrollmentsResponse } from "../types/enrollment.types";
-import { cookies } from "next/headers";
 import { backendRequest } from "@/lib/server/backend";
+import {  TutorsResponse } from "../types/toturstypes";
 
 export const getStudentDashboard =async()=>{
     const response = await apiClient.get("/students/me/dashboard/");
@@ -21,3 +21,11 @@ export const getEnrollmentsServer =
       method: "GET",
     });
   };
+
+export const getTotursServer = 
+async(): Promise<TutorsResponse> =>{
+  return backendRequest<TutorsResponse>({
+    path:"tutors",
+    method:"GET"
+  })
+}  
