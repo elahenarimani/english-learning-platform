@@ -1,11 +1,14 @@
-import { getTotursServer } from "@/feature/dashboard/api/dashboard.api";
-import Toturs from "@/feature/dashboard/components/toturs/Toturs";
-
-export default async function TotursPage() {
-  const toturs = await getTotursServer()
+import { getTutorsServer } from "@/feature/dashboard/api/dashboard.api";
+import Tutors from "@/feature/dashboard/components/tutors/Tutors";
+import { notFound } from "next/navigation";
+export default async function TutorsPage() {
+  const tutors = await getTutorsServer();
+  if (!tutors) {
+    notFound();
+  }
   return (
     <div>
-      <Toturs data ={toturs || []}/>
+      <Tutors data={tutors || []} />
     </div>
   );
 }

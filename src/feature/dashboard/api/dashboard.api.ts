@@ -1,7 +1,7 @@
 import { apiClient } from "@/lib/api/apiClient"
 import { EnrollmentsResponse } from "../types/enrollment.types";
 import { backendRequest } from "@/lib/server/backend";
-import {  TutorsResponse } from "../types/toturstypes";
+import {  TutorsResponse } from "../types/tutorstypes";
 
 export const getStudentDashboard =async()=>{
     const response = await apiClient.get("/students/me/dashboard/");
@@ -22,7 +22,7 @@ export const getEnrollmentsServer =
     });
   };
 
-export const getTotursServer = 
+export const getTutorsServer = 
 async(): Promise<TutorsResponse> =>{
   return backendRequest<TutorsResponse>({
     path:"tutors",

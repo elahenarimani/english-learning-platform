@@ -167,7 +167,7 @@
   border-radius: var.$radius-lg;
 } /* ========================= Responsive ========================= */ /* Tablet */
 @media (max-width: 1024px) {
-  .course-wrapper {
+  .totur-wrapper {
     max-width: 90%;
     .card-wrapper {
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -181,6 +181,13 @@
 
 /* Small Mobile */
 @media (max-width: 480px) {
+    .totur-wrapper {
+    max-width: 90%;
+    .card-wrapper {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      gap: var.$space-5;
+    }
+  }
 }
 
 .empty-wrapper {

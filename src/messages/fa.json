@@ -48,7 +48,7 @@
     "logout": "خروج",
     "logoutSuccess": "با موفقیت خارج شدید",
     "logoutError": "خروج از حساب کاربری ناموفق بود",
-    "toturs": "اساتید"
+    "tutors": "اساتید"
   },
   "NotFound": {
     "title": "صفحه پیدا نشد",

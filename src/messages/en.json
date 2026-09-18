@@ -46,7 +46,7 @@
     "logout": "Logout",
     "logoutSuccess": "You have been logged out successfully",
     "logoutError": "Failed to log out",
-    "toturs": "toturs"
+    "tutors": "tutors"
   },
   "NotFound": {
     "title": "Page Not Found",

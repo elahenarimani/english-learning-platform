@@ -4,20 +4,20 @@
 // import { BookOpen, Calendar, CheckCircle, Clock, XCircle } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-import styles from "./Toturs.module.scss";
-import { Tutor } from "../../types/toturstypes";
+import styles from "./Tutors.module.scss";
+import { Tutor } from "../../types/tutorstypes";
 import { User } from "lucide-react";
 // import { Enrollment } from "../../types/enrollment.types";
 // import { formatPersianDate } from "@/lib/utils/date";
 import Image from "next/image";
 import Button from "@/components/kit/Button/Button";
-interface totursProps {
+interface tutorsProps {
   data: Tutor[];
 }
 
-const Toturs = ({ data }: totursProps) => {
+const Tutors = ({ data }: tutorsProps) => {
   const t = useTranslations("tutors");
-  console.log("toturs:", data);
+  console.log("tutors:", data);
 
   if (!data || data.length === 0) {
     return (
@@ -32,9 +32,9 @@ const Toturs = ({ data }: totursProps) => {
       <h2 className={styles.title}>{t("title")}</h2>
       <p>{t("description")}</p>
       <div className={styles["card-wrapper"]}>
-        {data.map((toturs) => {
-          console.log("profile_picture:", toturs.profile_picture);
-          const languages = toturs.languages_spoken;
+        {data.map((tutors) => {
+          console.log("profile_picture:", tutors.profile_picture);
+          const languages = tutors.languages_spoken;
 
           let firstLanguage = "";
 
@@ -52,12 +52,12 @@ const Toturs = ({ data }: totursProps) => {
             firstLanguage = Object.keys(languages)[0] ?? "";
           }
           return (
-            <div key={toturs.id} className={styles.card}>
+            <div key={tutors.id} className={styles.card}>
               <div className={styles["profile-image-wrapper"]}>
-                {toturs.profile_picture ? (
+                {tutors.profile_picture ? (
                   <Image
-                    src={toturs.profile_picture}
-                    alt={`${toturs.user.first_name} ${toturs.user.last_name}`}
+                    src={tutors.profile_picture}
+                    alt={`${tutors.user.first_name} ${tutors.user.last_name}`}
                     fill
                     sizes="120px"
                     className={styles["profile-image"]}
@@ -69,9 +69,8 @@ const Toturs = ({ data }: totursProps) => {
               <p>{firstLanguage}</p>
 
               <p>
-                {toturs.user.first_name} {toturs.user.last_name}
+                {tutors.user.first_name} {tutors.user.last_name}
               </p>
-              {/* <p>{toturs.user.first_name}</p> */}
               <Button>مشاهده کامل پروفایل</Button>
             </div>
           );
@@ -81,4 +80,4 @@ const Toturs = ({ data }: totursProps) => {
   );
 };
 
-export default Toturs;
+export default Tutors;

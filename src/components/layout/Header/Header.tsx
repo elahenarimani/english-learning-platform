@@ -322,11 +322,11 @@ export function Header() {
               <ListItemText primary={t("profile")} />
             </ListItemButton>
 
-            <ListItemButton onClick={() => handleNavigation("toturs")}>
+            <ListItemButton onClick={() => handleNavigation("tutors")}>
               <ListItemIcon>
                 <User size={18} />
               </ListItemIcon>
-              <ListItemText primary={t("toturs")} />
+              <ListItemText primary={t("tutors")} />
             </ListItemButton>
 
             <ListItemButton
