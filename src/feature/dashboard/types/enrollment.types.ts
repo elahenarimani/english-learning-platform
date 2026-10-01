@@ -2,15 +2,15 @@ export interface Lesson {
   id: number;
   title: string;
   description: string;
-  lesson_video: string;
-  lesson_document: string;
+  lesson_video: string | null;
+  lesson_document: string | null;
 }
 
 export interface Tutor {
   id: number;
   user: number;
-  profile_picture: string;
-  languages_spoken: string;
+  profile_picture: string | null;
+  languages_spoken: unknown;
   subjects: string[];
 }
 
@@ -34,8 +34,8 @@ export interface Course {
   active_students: number;
   length: number;
   course_duration: number;
-  image: string;
-  language_flag: string;
+  image: string | null;
+  language_flag: string | null;
   lessons: Lesson[];
   tutor: Tutor;
 }
@@ -43,13 +43,13 @@ export interface Course {
 export interface Enrollment {
   id: number;
   course: Course;
-  status: "rejected" | "approved" | "pending_payment";
-  payment_amount: string;
+  status: "draft" | "pending_payment" | "under_review" | "approved" | "rejected" | "cancelled";
+  payment_amount: string | null;
   currency: string;
   payment_note: string;
-  payment_proof: string;
+  payment_proof: string | null;
   submitted_at: string;
-  reviewed_at: string;
+  reviewed_at: string | null;
 }
 
 export type EnrollmentsResponse = Enrollment[];

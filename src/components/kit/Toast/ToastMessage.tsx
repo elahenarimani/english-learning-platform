@@ -1,4 +1,4 @@
-// src/components/ui/toast/Toast.tsx
+// Toast presentation component.
 
 'use client';
 

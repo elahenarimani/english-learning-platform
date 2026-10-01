@@ -1,20 +1,14 @@
-// import createMiddleware from "next-intl/middleware";
-// import { routing } from "./i18n/routing";
 
-// export default createMiddleware(routing);
-
-// export const config = {
-//   matcher: "/((?!api|trpc|_next|_vercel|.*\\..*).*)",
-// };
 import createMiddleware from "next-intl/middleware";
 import { NextResponse, type NextRequest } from "next/server";
-import { routing } from "./i18n/routing";
+import { getPathname, routing } from "./i18n/routing";
 
 // ۱. ایجاد میدلور i18n جهت اضافه کردن خودکار /fa یا /en
 const intlMiddleware = createMiddleware(routing);
 
 const protectedRoutes = ["/dashboard"];
-const authRoutes = ["/login", "/register", "/forgot-password"];
+// Login and registration pass through i18n regardless of cookie presence.
+const authRoutes = ["/forgot-password"];
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -45,8 +39,16 @@ export function middleware(request: NextRequest) {
   );
 
   if (isProtectedRoute && !isAuthenticated) {
-    const loginUrl = new URL("/fa/login", request.url);
-    loginUrl.searchParams.set("callbackUrl", pathname);
+    const locale =
+      routing.locales.find((locale) => locale === pathname.split("/")[1]) ??
+      routing.defaultLocale;
+    const loginUrl = new URL(
+      getPathname({ href: "/login", locale }),
+      request.url,
+    );
+    loginUrl.search = new URLSearchParams({
+      callbackUrl: pathname + request.nextUrl.search,
+    }).toString();
     return NextResponse.redirect(loginUrl);
   }
 

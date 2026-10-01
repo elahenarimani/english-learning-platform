@@ -1,7 +1,4 @@
 import { apiClient } from "@/lib/api/apiClient"
-import { EnrollmentsResponse } from "../types/enrollment.types";
-import { backendRequest } from "@/lib/server/backend";
-import {  TutorsResponse } from "../types/tutorstypes";
 
 export const getStudentDashboard =async()=>{
     const response = await apiClient.get("/students/me/dashboard/");
@@ -12,20 +9,3 @@ export const getEnrollments = async () => {
   const response = await apiClient.get("/enrollments/");
   return response.data;
 };
-// server side API
-
-export const getEnrollmentsServer =
-  async (): Promise<EnrollmentsResponse> => {
-    return backendRequest<EnrollmentsResponse>({
-      path: "enrollments",
-      method: "GET",
-    });
-  };
-
-export const getTutorsServer = 
-async(): Promise<TutorsResponse> =>{
-  return backendRequest<TutorsResponse>({
-    path:"tutors",
-    method:"GET"
-  })
-}  

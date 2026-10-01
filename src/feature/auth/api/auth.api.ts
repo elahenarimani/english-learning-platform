@@ -60,6 +60,8 @@
 
 // ============================
 import axios from "axios";
+import { userSchema } from "../schemas/user.schema";
+import { getClientSession } from "../utils/clientSession";
 
 export interface RegisterRequest {
   email: string;
@@ -105,7 +107,39 @@ export const logoutUser = async () => {
 };
 
 // دریافت اطلاعات کاربر لاگین شده
-export const getMe = async (): Promise<User> => {
-  const response = await axios.get("/api/backend/me/");
-  return response.data;
+export const getMe = async (signal?: AbortSignal): Promise<User> => {
+  const generation = getClientSession().generation;
+  if (getClientSession().phase !== "active") throw new axios.CanceledError();
+  const isObsolete = () => signal?.aborted || getClientSession().generation !== generation || getClientSession().phase !== "active";
+  let response;
+  try {
+    response = await axios.get<unknown>("/api/backend/me/", { signal });
+  } catch (error) {
+    if (isObsolete()) throw new axios.CanceledError();
+    if (axios.isAxiosError(error) && error.response?.status === 401 &&
+      error.response.headers["x-session-state"] === "expired") {
+      throw new SessionExpiredError(generation);
+    }
+    throw error;
+  }
+  if (isObsolete()) throw new axios.CanceledError();
+  const result = userSchema.safeParse(response.data);
+  if (!result.success) throw new MeResponseContractError();
+  return result.data;
 };
+
+export class SessionExpiredError extends Error {
+  constructor(public readonly generation: number) {
+    super("Session expired");
+    this.name = "SessionExpiredError";
+  }
+}
+
+export class MeResponseContractError extends Error {
+  readonly code = "invalid_me_response";
+
+  constructor() {
+    super("Invalid me response");
+    this.name = "MeResponseContractError";
+  }
+}

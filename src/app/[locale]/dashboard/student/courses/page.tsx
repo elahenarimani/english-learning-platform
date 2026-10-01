@@ -1,13 +1,12 @@
 
-import { getEnrollmentsServer } from "@/feature/dashboard/api/dashboard.api";
 import MyCourses from "@/feature/dashboard/components/Cources/MyCourses";
+import { renderStudentPage } from "@/lib/server/studentPage";
 
-export default async function CoursesPage() {
-  const enrollments = await getEnrollmentsServer();
+export default function CoursesPage() {
 
-  return (
+  return renderStudentPage(
     <div>
-      <MyCourses data={enrollments} />
+      <MyCourses />
     </div>
   );
 }

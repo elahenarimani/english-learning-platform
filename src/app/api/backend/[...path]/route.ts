@@ -1,313 +1,23 @@
-// import { NextRequest, NextResponse } from "next/server";
-// import { cookies } from "next/headers";
 
-// const BACKEND_URL = process.env.API_URL;
-
-// if (!BACKEND_URL) {
-//   throw new Error("API_URL is not defined");
-// }
-
-// async function sendToBackend(
-//   url: string,
-//   request: NextRequest,
-//   body?: string,
-//   accessToken?: string,
-// ) {
-//   const headers = new Headers(request.headers);
-
-//   headers.delete("host");
-//   headers.delete("content-length");
-//   headers.delete("cookie");
-//   headers.delete("authorization");
-
-//   if (accessToken) {
-//     headers.set("Authorization", `Bearer ${accessToken}`);
-//   }
-
-//   return fetch(url, {
-//     method: request.method,
-//     headers,
-//     body,
-//     cache: "no-store",
-//   });
-// }
-
-// async function proxyRequest(
-//   request: NextRequest,
-//   context: {
-//     params: Promise<{ path: string[] }>;
-//   },
-// ) {
-//   const { path } = await context.params;
-
-//   const pathName = path.join("/");
-
-//   const backendUrl = `${BACKEND_URL}/${pathName}/`;
-//   const queryString = request.nextUrl.search;
-//   const finalBackendUrl = `${backendUrl}${queryString}`;
-
-//   const cookieStore = await cookies();
-
-//   const accessToken = cookieStore.get("access_token")?.value;
-//   const refreshToken = cookieStore.get("refresh_token")?.value;
-
-//   let body: string | undefined;
-
-//   if (request.method !== "GET" && request.method !== "HEAD") {
-//     body = await request.text();
-//   }
-
-//   /*
-//    * LOGIN
-//    */
-//   if (pathName === "login") {
-//     const response = await sendToBackend(
-//       finalBackendUrl,
-//       request,
-//       body,
-//     );
-
-//     const responseBody = await response.text();
-
-//     if (!response.ok) {
-//       return new NextResponse(responseBody, {
-//         status: response.status,
-//         headers: {
-//           "Content-Type":
-//             response.headers.get("Content-Type") ??
-//             "application/json",
-//         },
-//       });
-//     }
-
-//     const data = JSON.parse(responseBody);
-
-//     const nextResponse = NextResponse.json({
-//       ok: true,
-//     });
-
-//     nextResponse.cookies.set("access_token", data.access, {
-//       httpOnly: true,
-//       secure: process.env.NODE_ENV === "production",
-//       sameSite: "lax",
-//       path: "/",
-//     });
-
-//     nextResponse.cookies.set("refresh_token", data.refresh, {
-//       httpOnly: true,
-//       secure: process.env.NODE_ENV === "production",
-//       sameSite: "lax",
-//       path: "/",
-//     });
-
-//     return nextResponse;
-//   }
-
-//   /*
-//    * REFRESH
-//    *
-//    * Frontend:
-//    * /api/backend/token/refresh/
-//    *
-//    * Backend:
-//    * /api/token/refresh/
-//    */
-//   if (pathName === "token/refresh") {
-//     if (!refreshToken) {
-//       return NextResponse.json(
-//         {
-//           message: "Refresh token not found",
-//         },
-//         {
-//           status: 401,
-//         },
-//       );
-//     }
-
-//     const response = await fetch(
-//       `${BACKEND_URL}/token/refresh/`,
-//       {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify({
-//           refresh: refreshToken,
-//         }),
-//         cache: "no-store",
-//       },
-//     );
-
-//     const responseBody = await response.text();
-
-//     if (!response.ok) {
-//       const nextResponse = new NextResponse(responseBody, {
-//         status: response.status,
-//         headers: {
-//           "Content-Type":
-//             response.headers.get("Content-Type") ??
-//             "application/json",
-//         },
-//       });
-
-//       nextResponse.cookies.delete("access_token");
-//       nextResponse.cookies.delete("refresh_token");
-
-//       return nextResponse;
-//     }
-
-//     const data = JSON.parse(responseBody);
-
-//     const nextResponse = NextResponse.json({
-//       ok: true,
-//     });
-
-//     nextResponse.cookies.set(
-//       "access_token",
-//       data.access,
-//       {
-//         httpOnly: true,
-//         secure: process.env.NODE_ENV === "production",
-//         sameSite: "lax",
-//         path: "/",
-//       },
-//     );
-
-//     nextResponse.cookies.set(
-//       "refresh_token",
-//       data.refresh ?? refreshToken,
-//       {
-//         httpOnly: true,
-//         secure: process.env.NODE_ENV === "production",
-//         sameSite: "lax",
-//         path: "/",
-//       },
-//     );
-
-//     return nextResponse;
-//   }
-
-//   /*
-//    * NORMAL REQUEST
-//    */
-//   let response = await sendToBackend(
-//     finalBackendUrl,
-//     request,
-//     body,
-//     accessToken,
-//   );
-
-//   /*
-//    * ACCESS TOKEN EXPIRED
-//    */
-//   if (response.status === 401 && refreshToken) {
-//     const refreshResponse = await fetch(
-//       `${BACKEND_URL}/token/refresh/`,
-//       {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify({
-//           refresh: refreshToken,
-//         }),
-//         cache: "no-store",
-//       },
-//     );
-
-//     if (refreshResponse.ok) {
-//       const refreshData = await refreshResponse.json();
-
-//       response = await sendToBackend(
-//         finalBackendUrl,
-//         request,
-//         body,
-//         refreshData.access,
-//       );
-
-//       const responseBody = await response.text();
-
-//       const nextResponse = new NextResponse(
-//         responseBody,
-//         {
-//           status: response.status,
-//           headers: {
-//             "Content-Type":
-//               response.headers.get("Content-Type") ??
-//               "application/json",
-//           },
-//         },
-//       );
-
-//       nextResponse.cookies.set(
-//         "access_token",
-//         refreshData.access,
-//         {
-//           httpOnly: true,
-//           secure: process.env.NODE_ENV === "production",
-//           sameSite: "lax",
-//           path: "/",
-//         },
-//       );
-
-//       nextResponse.cookies.set(
-//         "refresh_token",
-//         refreshData.refresh ?? refreshToken,
-//         {
-//           httpOnly: true,
-//           secure: process.env.NODE_ENV === "production",
-//           sameSite: "lax",
-//           path: "/",
-//         },
-//       );
-
-//       return nextResponse;
-//     }
-
-//     const responseBody = await response.text();
-
-//     const nextResponse = new NextResponse(
-//       responseBody,
-//       {
-//         status: 401,
-//         headers: {
-//           "Content-Type":
-//             response.headers.get("Content-Type") ??
-//             "application/json",
-//         },
-//       },
-//     );
-
-//     nextResponse.cookies.delete("access_token");
-//     nextResponse.cookies.delete("refresh_token");
-
-//     return nextResponse;
-//   }
-
-//   /*
-//    * NORMAL RESPONSE
-//    */
-//   const responseBody = await response.text();
-
-//   return new NextResponse(responseBody, {
-//     status: response.status,
-//     headers: {
-//       "Content-Type":
-//         response.headers.get("Content-Type") ??
-//         "application/json",
-//     },
-//   });
-// }
-
-// export const GET = proxyRequest;
-// export const POST = proxyRequest;
-// export const PUT = proxyRequest;
-// export const PATCH = proxyRequest;
-// export const DELETE = proxyRequest;
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
 const BACKEND_URL = process.env.API_URL;
+
+function backendError(code: string) {
+  return NextResponse.json(
+    { detail: "Unable to complete the backend request.", code },
+    { status: 502 },
+  );
+}
+
+function forwardResponse(response: Response) {
+  const headers = new Headers(response.headers);
+  // Browser session cookies are managed by Next.js, not forwarded from the API.
+  headers.delete("set-cookie");
+  headers.delete("x-session-state");
+  return new NextResponse(response.body, { status: response.status, headers });
+}
 
 async function proxyRequest(
   request: NextRequest,
@@ -336,27 +46,73 @@ async function proxyRequest(
       ? await request.text()
       : undefined;
 
-  let response = await fetch(targetUrl, {
-    method: request.method,
-    headers: requestHeaders,
-    body: requestBody,
-    cache: "no-store",
-  });
+  let response: Response;
+  try {
+    response = await fetch(targetUrl, {
+      method: request.method,
+      headers: requestHeaders,
+      body: requestBody,
+      cache: "no-store",
+    });
+  } catch {
+    return backendError("backend_unavailable");
+  }
 
   // مدیریت تمدید توکن در صورت دریافت ۴۰۱
   if (response.status === 401 && refreshToken) {
-    const refreshRes = await fetch(`${BACKEND_URL}/token/refresh/`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ refresh: refreshToken }),
-    });
+    let refreshRes: Response;
+    try {
+      refreshRes = await fetch(`${BACKEND_URL}/token/refresh/`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ refresh: refreshToken }),
+        cache: "no-store",
+      });
+    } catch {
+      return backendError("refresh_unavailable");
+    }
 
-    if (refreshRes.ok) {
-      const refreshData = await refreshRes.json();
-      const newAccessToken: string = refreshData.access;
+    if (refreshRes.status === 401) {
+      const error: unknown = await refreshRes.json().catch(() => null);
+      if (
+        error !== null &&
+        typeof error === "object" &&
+        "code" in error &&
+        error.code === "token_not_valid"
+      ) {
+        const res = NextResponse.json(
+          { detail: "Session has expired. Please sign in again.", code: "token_not_valid" },
+          { status: 401, headers: { "X-Session-State": "expired" } },
+        );
+        for (const name of ["access_token", "refresh_token"]) {
+          res.cookies.set(name, "", {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "lax",
+            path: "/",
+            maxAge: 0,
+          });
+        }
+        return res;
+      }
+    }
 
-      // ارسال مجدد درخواست اولیه با توکن جدید
-      requestHeaders.set("Authorization", `Bearer ${newAccessToken}`);
+    if (!refreshRes.ok) return backendError("refresh_failed");
+
+    let newAccessToken: string | undefined;
+    try {
+      // Next.js parses all Set-Cookie headers, including Expires values containing commas.
+      newAccessToken = new NextResponse(null, { headers: refreshRes.headers })
+        .cookies.get("access_token")?.value;
+    } catch {
+      return backendError("invalid_refresh_response");
+    }
+    if (!newAccessToken || !/^[A-Za-z0-9._~-]+$/.test(newAccessToken)) {
+      return backendError("invalid_refresh_response");
+    }
+
+    requestHeaders.set("Authorization", `Bearer ${newAccessToken}`);
+    try {
       response = await fetch(targetUrl, {
         method: request.method,
         headers: requestHeaders,
@@ -364,24 +120,25 @@ async function proxyRequest(
         cache: "no-store",
       });
 
-      // ساخت پاسخ جدید و ست کردن کوکی توکن جدید
-      const res = new NextResponse(response.body, {
-        status: response.status,
-        headers: response.headers,
-      });
+    } catch {
+      return backendError("backend_unavailable");
+    }
 
+    const res = forwardResponse(response);
+    // A second 401 stays a failure; do not refresh again or persist the rejected access token.
+    if (response.status !== 401) {
       res.cookies.set("access_token", newAccessToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: "lax",
         path: "/",
+        maxAge: 15 * 60,
       });
-
-      return res;
     }
+    return res;
   }
 
-  return response;
+  return forwardResponse(response);
 }
 
 export {

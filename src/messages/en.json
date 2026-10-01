@@ -1,4 +1,10 @@
 {
+  "SessionRecovery": {
+    "loading": "Restoring your session…",
+    "temporary": "We could not restore your session. Please try again.",
+    "stopped": "Automatic recovery has stopped. You can try again manually.",
+    "retry": "Try again"
+  },
   "Home": {
     "title": "Welcome to the language learning platform",
     "description": "Learn languages with the best teachers"
@@ -76,7 +82,11 @@
     "status": {
       "approved": "Approved",
       "rejected": "Rejected",
-      "pending_payment": "Pending Payment"
+      "pending_payment": "Pending Payment",
+      "draft": "Draft",
+      "under_review": "Under Review",
+      "cancelled": "Cancelled",
+      "unknown": "Unknown status"
     }
   },
 "tutors": {

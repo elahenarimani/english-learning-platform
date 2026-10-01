@@ -93,26 +93,43 @@ import { NextRequest, NextResponse } from "next/server";
 const BACKEND_URL = process.env.API_URL;
 
 export async function POST(request: NextRequest) {
+  let body: unknown;
   try {
-    const body = await request.json();
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ detail: "درخواست ورود نامعتبر است.", code: "invalid_request" }, { status: 400 });
+  }
 
-    // ارسال اطلاعات به endpoint لاگین جنگو (آدرس لاگین خود را چک کنید، معمولا /token/ یا /login/ است)
-    const res = await fetch(`${BACKEND_URL}/login/`, {
+  let res: Response;
+  try {
+    res = await fetch(`${BACKEND_URL}/login/`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
     });
+  } catch {
+    return NextResponse.json(
+      { detail: "ارتباط با سرور ورود برقرار نشد.", code: "login_unavailable" },
+      { status: 502 },
+    );
+  }
 
-    const data = await res.json();
+  // Do not expose upstream bodies: error responses can contain sensitive data.
+  if (!res.ok) {
+    return NextResponse.json(
+      { detail: "درخواست ورود ناموفق بود.", code: "login_rejected" },
+      { status: res.status },
+    );
+  }
 
-    if (!res.ok) {
-      return NextResponse.json(
-        { detail: data.detail || "اطلاعات ورود اشتباه است." },
-        { status: res.status }
-      );
-    }
+  try {
+    const data: unknown = await res.json();
+    if (
+      data === null || typeof data !== "object" ||
+      !("access" in data) || !("refresh" in data) ||
+      typeof data.access !== "string" || data.access.trim().length === 0 ||
+      typeof data.refresh !== "string" || data.refresh.trim().length === 0
+    ) throw new Error("Invalid login response");
 
     const { access, refresh } = data;
 
@@ -142,10 +159,10 @@ export async function POST(request: NextRequest) {
     });
 
     return response;
-  } catch (error) {
+  } catch {
     return NextResponse.json(
-      { message: "خطایی در برقراری ارتباط با سرور رخ داده است." },
-      { status: 500 }
+      { detail: "پاسخ سرور ورود نامعتبر است.", code: "invalid_login_response" },
+      { status: 502 }
     );
   }
 }

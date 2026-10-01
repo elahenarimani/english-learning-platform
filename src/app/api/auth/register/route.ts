@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { userSchema } from "@/feature/auth/schemas/user.schema";
 
 const BACKEND_URL = process.env.API_URL;
 
@@ -22,25 +23,45 @@ export async function POST(request: NextRequest) {
       },
     );
 
-    const responseBody = await response.text();
+    const data: unknown = await response.json().catch(() => null);
+    if (response.ok) {
+      const result = userSchema.safeParse(data);
+      if (!result.success) {
+        return NextResponse.json(
+          { message: "Invalid registration response", code: "invalid_registration_response" },
+          { status: 502 },
+        );
+      }
+      // Return only the validated User fields, never upstream cookies or tokens.
+      return NextResponse.json(result.data, { status: response.status });
+    }
 
-    return new NextResponse(responseBody, {
-      status: response.status,
-      headers: {
-        "Content-Type":
-          response.headers.get("Content-Type") ??
-          "application/json",
-      },
-    });
-  } catch (error) {
-    console.error("Register route error:", error);
+    if (response.status === 400 && data !== null && typeof data === "object") {
+      const fields: Record<string, string | string[]> = {};
+      for (const key of ["email", "password", "first_name", "last_name", "is_teacher", "non_field_errors"]) {
+        const value: unknown = Object.getOwnPropertyDescriptor(data, key)?.value;
+        if (typeof value === "string" ||
+          (Array.isArray(value) && value.every((item: unknown) => typeof item === "string"))) {
+          fields[key] = value;
+        }
+      }
+      if (Object.keys(fields).length > 0) {
+        return NextResponse.json(fields, { status: 400 });
+      }
+    }
+    return NextResponse.json(
+      { message: "Registration failed", code: "registration_rejected" },
+      { status: response.status },
+    );
+  } catch {
 
     return NextResponse.json(
       {
-        message: "Internal server error",
+        message: "Registration service unavailable",
+        code: "registration_unavailable",
       },
       {
-        status: 500,
+        status: 502,
       },
     );
   }

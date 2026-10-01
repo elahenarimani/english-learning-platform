@@ -5,7 +5,7 @@
 import { useEffect, useState } from 'react';
 
 import { toast } from './toast';
-import { Toast } from './Toast';
+import { Toast } from './ToastMessage';
 import { ToastItem } from './toast.types';
 
 export function ToastContainer() {

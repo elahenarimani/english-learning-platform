@@ -1,7 +1,7 @@
 "use client";
 
 import clsx from "clsx";
-import { BookOpen, Calendar, CheckCircle, Clock, XCircle } from "lucide-react";
+import { Ban, BookOpen, Calendar, CheckCircle, Clock, FileText, Hourglass, XCircle, type LucideIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import styles from "./StudentDashboard.module.scss";
@@ -12,14 +12,22 @@ interface StudentsProps {
   data: Enrollment[];
 }
 
+const statusIcons = {
+  draft: FileText,
+  pending_payment: Clock,
+  under_review: Hourglass,
+  approved: CheckCircle,
+  rejected: XCircle,
+  cancelled: Ban,
+} satisfies Record<Enrollment["status"], LucideIcon>;
+
+function isKnownStatus(value: unknown): value is Enrollment["status"] {
+  return typeof value === "string" && Object.prototype.hasOwnProperty.call(statusIcons, value);
+}
+
 const StudentDashboard = ({ data }: StudentsProps) => {
   const t = useTranslations("MyCourses");
 
-  const statusIcons = {
-    approved: CheckCircle,
-    rejected: XCircle,
-    pending_payment: Clock,
-  };
 
   if (!data || data.length === 0) {
     return (
@@ -36,16 +44,16 @@ const StudentDashboard = ({ data }: StudentsProps) => {
 
       <div className={styles["card-wrapper"]}>
         {data.map((enrollment) => {
-          const status = enrollment.status?.toLowerCase();
-          const StatusIcon = status
-            ? statusIcons[status as keyof typeof statusIcons]
-            : null;
+          const status = isKnownStatus(enrollment.status) ? enrollment.status : null;
+          const StatusIcon = status ? statusIcons[status] : null;
+          // Keep the existing cancellation styling without changing the API value.
+          const styleStatus = status === "cancelled" ? "canceled" : status;
           const persianDate = formatPersianDate(enrollment.submitted_at);
           return (
             <div
               className={clsx(
                 styles.card,
-                status && styles[`card-status-${status}`],
+                styleStatus && styles[`card-status-${styleStatus}`],
               )}
               key={enrollment.id}
             >
@@ -58,11 +66,11 @@ const StudentDashboard = ({ data }: StudentsProps) => {
                 <div
                   className={clsx(
                     styles["course-status"],
-                    status && styles[`status-${status}`],
+                    styleStatus && styles[`status-${styleStatus}`],
                   )}
                 >
                   {StatusIcon && <StatusIcon size={16} />}
-                  <span>{status ? t(`status.${status}`) : ""}</span>
+                  <span>{t(status ? `status.${status}` : "status.unknown")}</span>
                 </div>
               </div>
               <h3 className={styles["card-title"]}>
